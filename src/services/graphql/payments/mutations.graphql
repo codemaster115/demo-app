@@ -1,0 +1,72 @@
+mutation CreateACHPaymentMethod($paymentMethodInput: CreateACHPaymentMethodInput!) {
+  createACHPaymentMethod(paymentMethodInput: $paymentMethodInput) {
+    ... on MutationCreateACHPaymentMethodSuccess {
+      data {
+        id
+      }
+    }
+    ... on ValidationError {
+      code
+      fieldErrors {
+        message
+        path
+      }
+      message
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on Error {
+      code
+      message
+    }
+  }
+}
+
+mutation CreateInstantPayment($paymentMethodInput: CreateInstantPaymentInput!) {
+  createInstantPaymentSchedule(input: $paymentMethodInput) {
+    ... on MutationCreateInstantPaymentScheduleSuccess {
+      data {
+        amount
+        paymentDate
+        methodId
+        id
+      }
+    }
+    ... on ValidationError {
+      code
+      fieldErrors {
+        message
+        path
+      }
+      message
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on Error {
+      code
+      message
+    }
+  }
+}
+
+mutation CreateDueDatePaymentSchedule($methodId: String!, $type: PaymentType!) {
+  createDueDatePaymentSchedule(input: { methodId: $methodId, type: $type }) {
+    ... on MutationCreateDueDatePaymentScheduleSuccess {
+      data {
+        methodId
+      }
+    }
+  }
+}
+
+mutation DeletePaymentSchedule($scheduleId: String!) {
+  deletePaymentSchedule(scheduleId: $scheduleId) {
+    ... on MutationDeletePaymentScheduleSuccess {
+      data
+    }
+  }
+}

@@ -1,0 +1,67 @@
+query GetAccountOpenDate {
+  cardholder @persist {
+    employmentStartDate
+  }
+}
+
+query GetAccountDetailsForHome {
+  account {
+    creditLimit
+    currentBalance
+    dueDateUtc
+  }
+  cardholder {
+    firstName
+    lastName
+  }
+  achPaymentMethods {
+    id
+  }
+  cardArt {
+    ... on QueryCardArtSuccess {
+      data {
+        backImageUrl
+        frontImageUrl
+      }
+    }
+  }
+}
+
+query GetAccountBalance {
+  account {
+    currentBalance
+  }
+}
+
+query GetOffersForMembership($category: OfferCategory) {
+  offers(category: $category) {
+    ... on QueryOffersSuccess {
+      data {
+        title
+        details
+        longDetails
+        identifier
+        hypercardMerchant {
+          logoImageUrl
+        }
+      }
+    }
+  }
+}
+
+query GetRestaurants($restaurantCity: RestaurantCity) {
+  offers(restaurantCity: $restaurantCity, onlyRestaurantOffers: true) {
+    ... on QueryOffersSuccess {
+      data {
+        title
+        details
+        identifier
+        restaurantOffer {
+          primaryImageUrl
+          secondaryImageUrl
+          location
+        }
+      }
+    }
+  }
+}

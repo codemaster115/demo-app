@@ -1,0 +1,22 @@
+mutation SendOtp($phoneNumber: String!) {
+  sendOTP(phoneNumber: $phoneNumber) {
+    ... on MutationSendOTPSuccess {
+      data
+    }
+    ... on Error {
+      code
+      message
+    }
+  }
+}
+mutation SubmitFeedback($feedback: String!) {
+  submitFeedback(feedback: $feedback) {
+    ... on MutationSubmitFeedbackSuccess {
+      data
+    }
+    ... on Error {
+      code
+      message
+    }
+  }
+}

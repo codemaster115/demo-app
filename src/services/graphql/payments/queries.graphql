@@ -1,0 +1,36 @@
+query GetCurrentStatementPaymentOptions {
+  account {
+    currentBalance
+    dueAmount
+    minimumPayment
+  }
+}
+
+query GetACHPaymentMethods {
+  achPaymentMethods {
+    id
+    accountLast4Digits
+    accountType
+    bankName
+    status
+  }
+}
+
+query GetPaymentSchedules(
+  $status: PaymentScheduleStatus
+  $frequency: PaymentScheduleFrequency
+) {
+  paymentSchedules(status: $status, frequency: $frequency) {
+    ... on QueryPaymentSchedulesSuccess {
+      data {
+        amount
+        status
+        paymentDate
+        type
+        methodId
+        frequency
+        id
+      }
+    }
+  }
+}
