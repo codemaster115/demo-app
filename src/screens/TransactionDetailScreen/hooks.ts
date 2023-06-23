@@ -50,6 +50,8 @@ const useTransactionById = (transactionId: number) => {
     ? `****${transactionData.cardLast4Digits}`
     : "Unknown card number";
   const rewardDescription = transactionData?.reward?.pointsReward?.rewardDescription;
+  const disputeStatus = transactionData?.dispute?.status;
+  const creditIndicator = transactionData?.creditIndicator;
 
   return {
     loading,
@@ -64,6 +66,8 @@ const useTransactionById = (transactionId: number) => {
     last4OfCard,
     areButtonsDisabled: areActionsDisabled,
     rewardDescription,
+    disputeStatus,
+    creditIndicator,
   };
 };
 

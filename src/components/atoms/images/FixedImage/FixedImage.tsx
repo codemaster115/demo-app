@@ -14,6 +14,7 @@ const FixedImage = ({ imageName, top, bottom, ...props }: FixedImageProps) => {
       top={top}
       bottom={bottom}
       width={windowWidth}
+      zIndex={0}
     />
   );
 };

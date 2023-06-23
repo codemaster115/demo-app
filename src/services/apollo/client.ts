@@ -1,21 +1,47 @@
+import { createPersistLink } from "@muchobien/apollo-persistence-mapper";
 import { ApolloClient, InMemoryCache, from, Reference } from "@apollo/client";
-import { AsyncStorageWrapper, persistCache } from "apollo3-cache-persist";
-import { enableFlipperApolloDevtools } from "react-native-flipper-apollo-devtools";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { persistenceMapper } from "@muchobien/apollo-persistence-mapper";
-import { retryLink, errorLink, httpLink, authLink, persistLink } from "./links";
+import { MMKVWrapper, persistCacheSync } from "apollo3-cache-persist";
+import { apolloDevToolsInit } from "react-native-apollo-devtools-client";
+import { MMKV } from "react-native-mmkv";
+import { env } from "services/env";
+import {
+  retryLink,
+  errorLink,
+  httpLink,
+  authLink,
+  // TODO add more links
+  // mutationErrorLink,
+  // roundTripPerformanceLink,
+} from "./links";
+import { persistenceMapper } from "./utils";
 
-type TransactionsResponse = { hasMore: boolean; transactions: Reference[] };
+type TransactionsResponse = {
+  hasMore: boolean;
+  allTransactions: Reference[];
+  nextPageOffset: number;
+};
 type TransactionsCache = {
   hasMore: boolean;
-  transactions: {
+  nextPageOffset: number;
+  allTransactions: {
     [__ref: string]: Reference;
   };
 };
 
+const mmkvStorage = new MMKV({
+  id: "apolloCache3",
+  encryptionKey: env.mmkvEncryptionKey,
+});
+
 const cache = new InMemoryCache({
   typePolicies: {
+    Cardholder: {
+      keyFields: [],
+    },
     Account: {
+      keyFields: [],
+    },
+    NotificationSettings: {
       keyFields: [],
     },
     QueryTransactionsSuccess: {
@@ -29,7 +55,8 @@ const cache = new InMemoryCache({
             existing
               ? {
                   hasMore: existing.hasMore,
-                  transactions: Object.values(existing.transactions),
+                  nextPageOffset: existing.nextPageOffset,
+                  allTransactions: Object.values(existing.allTransactions),
                 }
               : existing,
           merge: (
@@ -41,27 +68,28 @@ const cache = new InMemoryCache({
             if (!existing) {
               return {
                 hasMore: incoming.hasMore,
-                transactions: incoming.transactions.reduce((acc, next) => {
+                nextPageOffset: incoming.nextPageOffset,
+                allTransactions: incoming.allTransactions.reduce((acc, next) => {
                   acc[next.__ref] = next;
 
                   return acc;
-                }, {} as TransactionsCache["transactions"]),
+                }, {} as TransactionsCache["allTransactions"]),
               };
             }
 
             let mergedData = {
-              transactions: existing.transactions,
+              allTransactions: existing.allTransactions,
               hasMore: incoming.hasMore,
+              nextPageOffset: incoming.nextPageOffset,
             };
 
-            incoming.transactions.forEach((reference) => {
+            incoming.allTransactions.forEach((reference) => {
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              if (!mergedData.transactions[reference.__ref]) {
-                mergedData.transactions = {
-                  ...mergedData.transactions,
+              if (!mergedData.allTransactions[reference.__ref]) {
+                mergedData.allTransactions = {
+                  ...mergedData.allTransactions,
                   [reference.__ref]: reference,
                 };
-              } else {
               }
             });
 
@@ -73,22 +101,23 @@ const cache = new InMemoryCache({
   },
 });
 
-persistCache({
+persistCacheSync({
   cache,
-  storage: new AsyncStorageWrapper(AsyncStorage),
+  storage: new MMKVWrapper(mmkvStorage),
   persistenceMapper,
   trigger: "write",
   debug: __DEV__,
-}).catch((error) => {
-  console.error("Failed to restore Apollo cache", error);
 });
+
+const persistLink = createPersistLink();
 
 const client = new ApolloClient({
   cache,
-  link: from([retryLink, authLink, errorLink, persistLink, httpLink]),
+  link: from([persistLink, retryLink, authLink, errorLink, httpLink]),
 });
 
-// @ts-ignore
-enableFlipperApolloDevtools(client);
+if (__DEV__) {
+  apolloDevToolsInit(client);
+}
 
 export { client };

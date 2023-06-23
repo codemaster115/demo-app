@@ -21,3 +21,4 @@ const Touchable = (props: TouchableProps) => {
 // Use BaseTouchable when you don't want to automatically apply hitSlop
 // Else, use Touchable
 export { Touchable, BaseTouchable };
+export type { TouchableProps };

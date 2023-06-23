@@ -30,22 +30,6 @@
             "deprecationReason": null
           },
           {
-            "name": "approvalType",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "apr",
             "description": null,
             "args": [],
@@ -94,38 +78,6 @@
             "deprecationReason": null
           },
           {
-            "name": "cpAccountNumber",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "creditLimit",
             "description": null,
             "args": [],
@@ -151,22 +103,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "dateCreated",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
                 "ofType": null
               }
             },
@@ -247,22 +183,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Float",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -369,50 +289,6 @@
               "kind": "ENUM",
               "name": "AccountStatus",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "usage",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "AccountUsage",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -612,29 +488,6 @@
           },
           {
             "name": "thirdPartyFraud",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "AccountUsage",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "global",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "local",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1231,22 +1084,6 @@
         "description": null,
         "fields": [
           {
-            "name": "accountId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "activatedAt",
             "description": null,
             "args": [],
@@ -1533,7 +1370,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Card",
+                "name": "ShortCard",
                 "ofType": null
               }
             },
@@ -1565,7 +1402,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Card",
+                "name": "ShortCard",
                 "ofType": null
               }
             },
@@ -1576,6 +1413,29 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "CardReplacementReason",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "fraud",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lostOrStolen",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -1655,13 +1515,17 @@
         "description": null,
         "fields": [
           {
-            "name": "createdAt",
+            "name": "cardholderId",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1728,7 +1592,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Date",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1736,22 +1600,6 @@
           },
           {
             "name": "firstName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
             "description": null,
             "args": [],
             "type": {
@@ -1863,6 +1711,22 @@
             "deprecationReason": null
           },
           {
+            "name": "referralLink",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "residentialAddress",
             "description": null,
             "args": [],
@@ -1895,42 +1759,6 @@
             "deprecationReason": null
           },
           {
-            "name": "ssn",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ssnLastFour",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "state",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "DeserveProfileState",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "stytchUserId",
             "description": null,
             "args": [],
@@ -1947,13 +1775,17 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2014,54 +1846,6 @@
             "deprecationReason": null
           },
           {
-            "name": "country",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sequence",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "state",
             "description": null,
             "args": [],
@@ -2113,6 +1897,35 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "CatalogCategory",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "all",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "popular",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "premium",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -2406,61 +2219,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CreateDueDatePaymentScheduleInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "amount",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "methodId",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "PaymentType",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "CreateInstantPaymentInput",
         "description": null,
         "fields": null,
@@ -2559,47 +2317,6 @@
       },
       {
         "kind": "ENUM",
-        "name": "DeserveProfileState",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "abandoned",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "activeAccount",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "closedAccount",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "complete",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "incomplete",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
         "name": "DigitalWallet",
         "description": null,
         "fields": null,
@@ -2670,22 +2387,6 @@
               "kind": "SCALAR",
               "name": "DateTime",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deserveTransactionId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3327,9 +3028,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3355,9 +3060,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3407,9 +3116,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3535,18 +3248,6 @@
             "deprecationReason": null
           },
           {
-            "name": "cardacceptorNameLocation",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "category",
             "description": null,
             "args": [],
@@ -3588,18 +3289,6 @@
           },
           {
             "name": "coverImage",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cpMerchantCategoryCode",
             "description": null,
             "args": [],
             "type": {
@@ -3691,18 +3380,6 @@
             "deprecationReason": null
           },
           {
-            "name": "merchantBrand",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ExternalMerchantBrand",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "merchantType",
             "description": null,
             "args": [],
@@ -3736,30 +3413,6 @@
           },
           {
             "name": "phoneNumber",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondaryMerchantBrand",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ExternalMerchantBrand",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondaryMerchantName",
             "description": null,
             "args": [],
             "type": {
@@ -3838,11 +3491,64 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ExternalMerchantBrand",
+        "name": "FeatureFlags",
         "description": null,
         "fields": [
           {
-            "name": "id",
+            "name": "expenseManagementShown",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GiftCardBrand",
+        "description": null,
+        "fields": [
+          {
+            "name": "alwaysShowDisclaimer",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "brandKey",
             "description": null,
             "args": [],
             "type": {
@@ -3858,7 +3564,55 @@
             "deprecationReason": null
           },
           {
-            "name": "logoImage",
+            "name": "brandName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disclaimer",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disclaimerInstructions",
             "description": null,
             "args": [],
             "type": {
@@ -3870,7 +3624,396 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "displayInstructions",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "effectiveDollarPerPointsValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imageUrl",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "items",
+            "description": "List of gift card details for the brand",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "GiftCardItem",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "popularityRank",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "shortDescription",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "terms",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "termsAndConditionsInstructions",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GiftCardCatalog",
+        "description": null,
+        "fields": [
+          {
+            "name": "brandList",
+            "description": "List of brands in the catalog",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "GiftCardBrand",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "category",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CatalogCategory",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "maximumRedemptionValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "minimumRedemptionValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "GiftCardCreateOrderInputSchema",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "dollarValue",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "idempotencyKey",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "utid",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GiftCardItem",
+        "description": null,
+        "fields": [
+          {
+            "name": "faceValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isWholeAmountValueRequired",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pointsValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "redemptionInstructions",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "rewardName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "rewardType",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "utid",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "valueType",
             "description": null,
             "args": [],
             "type": {
@@ -3892,12 +4035,180 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Float",
-        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
-        "fields": null,
+        "kind": "OBJECT",
+        "name": "GiftCardOrder",
+        "description": null,
+        "fields": [
+          {
+            "name": "message",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "redemptionInstructions",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "inputFields": null,
-        "interfaces": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GiftCardWallet",
+        "description": null,
+        "fields": [
+          {
+            "name": "brandName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "credentials",
+            "description": "Gift Card credentials",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "externalRefID",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "faceValue",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hexColor",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imageUrl",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -3955,6 +4266,105 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "Insurance",
+        "description": null,
+        "fields": [
+          {
+            "name": "contactNumber",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "flair",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "iconUrl",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "longDetails",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "shortDetails",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Int",
         "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
@@ -4000,6 +4410,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "JSONObject",
+        "description": "The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Mutation",
         "description": null,
@@ -4008,22 +4428,6 @@
             "name": "activateCard",
             "description": null,
             "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
               {
                 "name": "last4Digits",
                 "description": null,
@@ -4054,55 +4458,6 @@
             "deprecationReason": null
           },
           {
-            "name": "cancelCard",
-            "description": null,
-            "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "reason",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "CardCancelReason",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationCancelCardResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "completePhoneNumberUpdate",
             "description": null,
             "args": [
@@ -4124,13 +4479,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationCompletePhoneNumberUpdateResult",
-                "ofType": null
-              }
+              "kind": "UNION",
+              "name": "MutationCompletePhoneNumberUpdateResult",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4202,7 +4553,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createDueDatePaymentSchedule",
+            "name": "createGiftCardOrder",
             "description": null,
             "args": [
               {
@@ -4213,7 +4564,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CreateDueDatePaymentScheduleInput",
+                    "name": "GiftCardCreateOrderInputSchema",
                     "ofType": null
                   }
                 },
@@ -4227,7 +4578,7 @@
               "name": null,
               "ofType": {
                 "kind": "UNION",
-                "name": "MutationCreateDueDatePaymentScheduleResult",
+                "name": "MutationCreateGiftCardOrderResult",
                 "ofType": null
               }
             },
@@ -4235,7 +4586,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createInstantPaymentSchedule",
+            "name": "createInstantPayment",
             "description": null,
             "args": [
               {
@@ -4260,7 +4611,7 @@
               "name": null,
               "ofType": {
                 "kind": "UNION",
-                "name": "MutationCreateInstantPaymentScheduleResult",
+                "name": "MutationCreateInstantPaymentResult",
                 "ofType": null
               }
             },
@@ -4301,11 +4652,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deletePaymentSchedule",
+            "name": "hideGiftcardWallet",
             "description": null,
             "args": [
               {
-                "name": "scheduleId",
+                "name": "externalRefID",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -4322,19 +4673,15 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationDeletePaymentScheduleResult",
-                "ofType": null
-              }
+              "kind": "UNION",
+              "name": "MutationHideGiftcardWalletResult",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "redeemPoints",
+            "name": "redeemPointsForCashback",
             "description": null,
             "args": [
               {
@@ -4355,13 +4702,46 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationRedeemPointsResult",
-                "ofType": null
+              "kind": "UNION",
+              "name": "MutationRedeemPointsForCashbackResult",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "referColleagues",
+            "description": null,
+            "args": [
+              {
+                "name": "inviteeEmails",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "SCALAR",
+                        "name": "String",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
+            ],
+            "type": {
+              "kind": "UNION",
+              "name": "MutationReferColleaguesResult",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4407,8 +4787,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
+                "kind": "UNION",
+                "name": "MutationRegisterOfferAnalyticResult",
                 "ofType": null
               }
             },
@@ -4416,11 +4796,11 @@
             "deprecationReason": null
           },
           {
-            "name": "replaceCard",
+            "name": "removeAutoPaymentSchedule",
             "description": null,
             "args": [
               {
-                "name": "cardId",
+                "name": "scheduleId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -4434,32 +4814,45 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
-              },
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "MutationRemoveAutoPaymentScheduleResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "replaceCard",
+            "description": null,
+            "args": [
               {
-                "name": "isDamaged",
+                "name": "newShippingAddress",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "UpdateCardholderAddressInput",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
               },
               {
-                "name": "isPhysical",
+                "name": "reason",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
+                    "kind": "ENUM",
+                    "name": "CardReplacementReason",
                     "ofType": null
                   }
                 },
@@ -4474,153 +4867,6 @@
               "ofType": {
                 "kind": "UNION",
                 "name": "MutationReplaceCardResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "reportCardFraud",
-            "description": null,
-            "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationReportCardFraudResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "reportLostOrStolenCard",
-            "description": null,
-            "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationReportLostOrStolenCardResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "resolveDispute",
-            "description": null,
-            "args": [
-              {
-                "name": "accountId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "disputeId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "resolution",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "DisputeResolution",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "resolutionDescription",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "DisputeResolutionDescription",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "MutationResolveDisputeResult",
                 "ofType": null
               }
             },
@@ -4880,6 +5126,18 @@
                 "deprecationReason": null
               },
               {
+                "name": "referralCode",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "testEmail",
                 "description": null,
                 "type": {
@@ -4992,6 +5250,18 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "referralCode",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
@@ -5010,22 +5280,6 @@
             "name": "updateCardPin",
             "description": null,
             "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
               {
                 "name": "pin",
                 "description": null,
@@ -5060,23 +5314,7 @@
             "description": null,
             "args": [
               {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "freeze",
+                "name": "shouldFreeze",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -5330,59 +5568,6 @@
       },
       {
         "kind": "UNION",
-        "name": "MutationCancelCardResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "BaseError",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "MutationCancelCardSuccess",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ValidationError",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "MutationCancelCardSuccess",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
         "name": "MutationCompletePhoneNumberUpdateResult",
         "description": null,
         "fields": null,
@@ -5542,7 +5727,7 @@
       },
       {
         "kind": "UNION",
-        "name": "MutationCreateDueDatePaymentScheduleResult",
+        "name": "MutationCreateGiftCardOrderResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -5556,7 +5741,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "MutationCreateDueDatePaymentScheduleSuccess",
+            "name": "MutationCreateGiftCardOrderSuccess",
             "ofType": null
           },
           {
@@ -5568,7 +5753,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MutationCreateDueDatePaymentScheduleSuccess",
+        "name": "MutationCreateGiftCardOrderSuccess",
         "description": null,
         "fields": [
           {
@@ -5580,7 +5765,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PaymentSchedule",
+                "name": "GiftCardOrder",
                 "ofType": null
               }
             },
@@ -5595,7 +5780,7 @@
       },
       {
         "kind": "UNION",
-        "name": "MutationCreateInstantPaymentScheduleResult",
+        "name": "MutationCreateInstantPaymentResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -5609,7 +5794,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "MutationCreateInstantPaymentScheduleSuccess",
+            "name": "MutationCreateInstantPaymentSuccess",
             "ofType": null
           },
           {
@@ -5621,7 +5806,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MutationCreateInstantPaymentScheduleSuccess",
+        "name": "MutationCreateInstantPaymentSuccess",
         "description": null,
         "fields": [
           {
@@ -5701,7 +5886,7 @@
       },
       {
         "kind": "UNION",
-        "name": "MutationDeletePaymentScheduleResult",
+        "name": "MutationHideGiftcardWalletResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -5715,7 +5900,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "MutationDeletePaymentScheduleSuccess",
+            "name": "MutationHideGiftcardWalletSuccess",
             "ofType": null
           },
           {
@@ -5727,7 +5912,166 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MutationDeletePaymentScheduleSuccess",
+        "name": "MutationHideGiftcardWalletSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Void",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "MutationRedeemPointsForCashbackResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "MutationRedeemPointsForCashbackSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MutationRedeemPointsForCashbackSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Void",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "MutationReferColleaguesResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "MutationReferColleaguesSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MutationReferColleaguesSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Void",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "MutationRegisterOfferAnalyticResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "MutationRegisterOfferAnalyticSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MutationRegisterOfferAnalyticSuccess",
         "description": null,
         "fields": [
           {
@@ -5754,7 +6098,7 @@
       },
       {
         "kind": "UNION",
-        "name": "MutationRedeemPointsResult",
+        "name": "MutationRemoveAutoPaymentScheduleResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -5768,7 +6112,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "MutationRedeemPointsSuccess",
+            "name": "MutationRemoveAutoPaymentScheduleSuccess",
             "ofType": null
           },
           {
@@ -5780,7 +6124,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MutationRedeemPointsSuccess",
+        "name": "MutationRemoveAutoPaymentScheduleSuccess",
         "description": null,
         "fields": [
           {
@@ -5792,7 +6136,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Void",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -5846,165 +6190,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "CardReplacement",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "MutationReportCardFraudResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "BaseError",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "MutationReportCardFraudSuccess",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ValidationError",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "MutationReportCardFraudSuccess",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CardReplacement",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "MutationReportLostOrStolenCardResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "BaseError",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "MutationReportLostOrStolenCardSuccess",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ValidationError",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "MutationReportLostOrStolenCardSuccess",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CardReplacement",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "MutationResolveDisputeResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "BaseError",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "MutationResolveDisputeSuccess",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ValidationError",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "MutationResolveDisputeSuccess",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Dispute",
                 "ofType": null
               }
             },
@@ -6818,15 +7003,15 @@
         "description": null,
         "fields": [
           {
-            "name": "rewards",
+            "name": "promotions",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "RewardNotificationSettings",
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -6834,15 +7019,15 @@
             "deprecationReason": null
           },
           {
-            "name": "statements",
+            "name": "rewards",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "StatementNotificationSettings",
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -6857,8 +7042,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "TransactionNotificationSettings",
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -6878,11 +7063,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "rewards",
+            "name": "promotions",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "RewardNotificationSettingsInput",
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -6890,11 +7075,11 @@
             "deprecationReason": null
           },
           {
-            "name": "statements",
+            "name": "rewards",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StatementNotificationSettingsInput",
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -6905,8 +7090,8 @@
             "name": "transactions",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TransactionNotificationSettingsInput",
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -6983,22 +7168,6 @@
               "kind": "OBJECT",
               "name": "HypercardMerchant",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "identifier",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7108,6 +7277,12 @@
             "deprecationReason": null
           },
           {
+            "name": "kFactor",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "lifestyle",
             "description": null,
             "isDeprecated": false,
@@ -7177,6 +7352,57 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Organization",
+        "description": null,
+        "fields": [
+          {
+            "name": "domains",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -7644,7 +7870,7 @@
         "description": null,
         "fields": [
           {
-            "name": "amount",
+            "name": "amountInDollars",
             "description": null,
             "args": [],
             "type": {
@@ -7684,7 +7910,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deserveAccountId",
+            "name": "displayDollarAmount",
             "description": null,
             "args": [],
             "type": {
@@ -7700,7 +7926,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deservePaymentMethodId",
+            "name": "displayFlair",
             "description": null,
             "args": [],
             "type": {
@@ -7712,13 +7938,17 @@
             "deprecationReason": null
           },
           {
-            "name": "deservePaymentScheduleId",
+            "name": "displayTitle",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7987,6 +8217,49 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "PointsMultiplier",
+        "description": null,
+        "fields": [
+          {
+            "name": "multiplier",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "offer",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Offer",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "PosType",
         "description": null,
@@ -8034,33 +8307,9 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Account",
+                "kind": "UNION",
+                "name": "QueryAccountResult",
                 "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "achPaymentMethods",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "PaymentMethod",
-                    "ofType": null
-                  }
-                }
               }
             },
             "isDeprecated": false,
@@ -8079,32 +8328,15 @@
             "deprecationReason": null
           },
           {
-            "name": "card",
+            "name": "activePointsMultiplier",
             "description": null,
-            "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "UNION",
-                "name": "QueryCardResult",
+                "name": "QueryActivePointsMultiplierResult",
                 "ofType": null
               }
             },
@@ -8132,164 +8364,57 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Cardholder",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cards",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "QueryCardsResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "categories",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Category",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "detokenizedCard",
-            "description": null,
-            "args": [
-              {
-                "name": "cardId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "QueryDetokenizedCardResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "dispute",
-            "description": null,
-            "args": [
-              {
-                "name": "disputeId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "QueryDisputeResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "disputes",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Dispute",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "externalMerchant",
-            "description": null,
-            "args": [
-              {
-                "name": "merchantId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
               "kind": "UNION",
-              "name": "QueryExternalMerchantResult",
+              "name": "QueryCardholderResult",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "featureFlags",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryFeatureFlagsResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "giftCardCatalog",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryGiftCardCatalogResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "giftCardWallet",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryGiftCardWalletResult",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -8311,13 +8436,49 @@
             "deprecationReason": null
           },
           {
+            "name": "insurances",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryInsurancesResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "netSavingsThisMonth",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryNetSavingsThisMonthResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "notificationSettings",
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "NotificationSettings",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryNotificationSettingsResult",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -8388,6 +8549,18 @@
             "deprecationReason": null
           },
           {
+            "name": "organization",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "UNION",
+              "name": "QueryOrganizationResult",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "paymentMethods",
             "description": null,
             "args": [],
@@ -8395,32 +8568,65 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "PaymentMethod",
-                    "ofType": null
-                  }
-                }
+                "kind": "UNION",
+                "name": "QueryPaymentMethodsResult",
+                "ofType": null
               }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "paymentSchedules",
+            "name": "pointToDollarConversion",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryPointToDollarConversionResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "primaryCard",
             "description": null,
             "args": [
               {
-                "name": "frequency",
+                "name": "detokenized",
                 "description": null,
                 "type": {
-                  "kind": "ENUM",
-                  "name": "PaymentScheduleFrequency",
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": "false",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "UNION",
+              "name": "QueryPrimaryCardResult",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recommendedReferrals",
+            "description": null,
+            "args": [
+              {
+                "name": "pagination",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "OffsetPaginationInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -8428,11 +8634,11 @@
                 "deprecationReason": null
               },
               {
-                "name": "status",
-                "description": null,
+                "name": "searchText",
+                "description": "If empty, query returns 5 recommended referrals",
                 "type": {
-                  "kind": "ENUM",
-                  "name": "PaymentScheduleStatus",
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -8445,7 +8651,7 @@
               "name": null,
               "ofType": {
                 "kind": "UNION",
-                "name": "QueryPaymentSchedulesResult",
+                "name": "QueryRecommendedReferralsResult",
                 "ofType": null
               }
             },
@@ -8453,13 +8659,17 @@
             "deprecationReason": null
           },
           {
-            "name": "primaryCard",
+            "name": "referralOffer",
             "description": null,
             "args": [],
             "type": {
-              "kind": "UNION",
-              "name": "QueryPrimaryCardResult",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "QueryReferralOfferResult",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -8531,8 +8741,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "UNION",
+              "name": "QueryTotalPointsResult",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8542,18 +8752,6 @@
             "name": "transaction",
             "description": null,
             "args": [
-              {
-                "name": "includeMerchant",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
               {
                 "name": "includeReward",
                 "description": null,
@@ -8608,18 +8806,6 @@
                 "deprecationReason": null
               },
               {
-                "name": "includeMerchants",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
                 "name": "includeRewards",
                 "description": null,
                 "type": {
@@ -8633,7 +8819,7 @@
               },
               {
                 "name": "pagination",
-                "description": null,
+                "description": "Pagination against 'Transaction' objects only, 'PaymentTransaction' objects are injected into the page. Consider using 'nextPageOffset' to get the next page",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "OffsetPaginationInput",
@@ -8662,6 +8848,59 @@
               "ofType": {
                 "kind": "UNION",
                 "name": "QueryTransactionsResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryAccountResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryAccountSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryAccountSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
                 "ofType": null
               }
             },
@@ -8729,6 +8968,59 @@
       },
       {
         "kind": "UNION",
+        "name": "QueryActivePointsMultiplierResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryActivePointsMultiplierSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryActivePointsMultiplierSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PointsMultiplier",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
         "name": "QueryCardArtResult",
         "description": null,
         "fields": null,
@@ -8782,7 +9074,7 @@
       },
       {
         "kind": "UNION",
-        "name": "QueryCardResult",
+        "name": "QueryCardholderResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8796,7 +9088,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "QueryCardSuccess",
+            "name": "QueryCardholderSuccess",
             "ofType": null
           },
           {
@@ -8808,7 +9100,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "QueryCardSuccess",
+        "name": "QueryCardholderSuccess",
         "description": null,
         "fields": [
           {
@@ -8820,7 +9112,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Card",
+                "name": "Cardholder",
                 "ofType": null
               }
             },
@@ -8835,7 +9127,7 @@
       },
       {
         "kind": "UNION",
-        "name": "QueryCardsResult",
+        "name": "QueryFeatureFlagsResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8849,7 +9141,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "QueryCardsSuccess",
+            "name": "QueryFeatureFlagsSuccess",
             "ofType": null
           },
           {
@@ -8861,7 +9153,60 @@
       },
       {
         "kind": "OBJECT",
-        "name": "QueryCardsSuccess",
+        "name": "QueryFeatureFlagsSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "FeatureFlags",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryGiftCardCatalogResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryGiftCardCatalogSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryGiftCardCatalogSuccess",
         "description": null,
         "fields": [
           {
@@ -8879,7 +9224,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "Card",
+                    "name": "GiftCardCatalog",
                     "ofType": null
                   }
                 }
@@ -8896,7 +9241,7 @@
       },
       {
         "kind": "UNION",
-        "name": "QueryDetokenizedCardResult",
+        "name": "QueryGiftCardWalletResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8910,7 +9255,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "QueryDetokenizedCardSuccess",
+            "name": "QueryGiftCardWalletSuccess",
             "ofType": null
           },
           {
@@ -8922,7 +9267,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "QueryDetokenizedCardSuccess",
+        "name": "QueryGiftCardWalletSuccess",
         "description": null,
         "fields": [
           {
@@ -8933,8 +9278,130 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Card",
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "GiftCardWallet",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryInsurancesResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryInsurancesSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryInsurancesSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Insurance",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryNetSavingsThisMonthResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryNetSavingsThisMonthSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryNetSavingsThisMonthSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -8949,7 +9416,7 @@
       },
       {
         "kind": "UNION",
-        "name": "QueryDisputeResult",
+        "name": "QueryNotificationSettingsResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8963,7 +9430,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "QueryDisputeSuccess",
+            "name": "QueryNotificationSettingsSuccess",
             "ofType": null
           },
           {
@@ -8975,7 +9442,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "QueryDisputeSuccess",
+        "name": "QueryNotificationSettingsSuccess",
         "description": null,
         "fields": [
           {
@@ -8987,60 +9454,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Dispute",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "QueryExternalMerchantResult",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "BaseError",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "QueryExternalMerchantSuccess",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ValidationError",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "QueryExternalMerchantSuccess",
-        "description": null,
-        "fields": [
-          {
-            "name": "data",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ExternalMerchant",
+                "name": "NotificationSettings",
                 "ofType": null
               }
             },
@@ -9116,7 +9530,7 @@
       },
       {
         "kind": "UNION",
-        "name": "QueryPaymentSchedulesResult",
+        "name": "QueryOrganizationResult",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -9130,7 +9544,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "QueryPaymentSchedulesSuccess",
+            "name": "QueryOrganizationSuccess",
             "ofType": null
           },
           {
@@ -9142,7 +9556,60 @@
       },
       {
         "kind": "OBJECT",
-        "name": "QueryPaymentSchedulesSuccess",
+        "name": "QueryOrganizationSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Organization",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryPaymentMethodsResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryPaymentMethodsSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryPaymentMethodsSuccess",
         "description": null,
         "fields": [
           {
@@ -9160,10 +9627,63 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "PaymentSchedule",
+                    "name": "PaymentMethod",
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryPointToDollarConversionResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryPointToDollarConversionSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryPointToDollarConversionSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -9216,6 +9736,120 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Card",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryRecommendedReferralsResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryRecommendedReferralsSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryRecommendedReferralsSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ReferralEmployee",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "QueryReferralOfferResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryReferralOfferSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryReferralOfferSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Offer",
                 "ofType": null
               }
             },
@@ -9336,6 +9970,59 @@
       },
       {
         "kind": "UNION",
+        "name": "QueryTotalPointsResult",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "BaseError",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "QueryTotalPointsSuccess",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ValidationError",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QueryTotalPointsSuccess",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
         "name": "QueryTransactionResult",
         "description": null,
         "fields": null,
@@ -9441,6 +10128,65 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "ReferralEmployee",
+        "description": null,
+        "fields": [
+          {
+            "name": "firstName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workEmail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "ENUM",
         "name": "RestaurantCity",
         "description": null,
@@ -9449,7 +10195,19 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "newYork",
+            "name": "austin",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "miami",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nyc",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -9676,11 +10434,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "RewardNotificationSettings",
+        "name": "ShortCard",
         "description": null,
         "fields": [
           {
-            "name": "newTransactionReward",
+            "name": "id",
             "description": null,
             "args": [],
             "type": {
@@ -9688,7 +10446,23 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Boolean",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "CardStatus",
                 "ofType": null
               }
             },
@@ -9698,33 +10472,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "RewardNotificationSettingsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "newTransactionReward",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -10045,124 +10792,6 @@
       },
       {
         "kind": "OBJECT",
-        "name": "StatementNotificationSettings",
-        "description": null,
-        "fields": [
-          {
-            "name": "paymentDue",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "paymentReceived",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "statementReady",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "StatementNotificationSettingsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "paymentDue",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "paymentReceived",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "statementReady",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
         "name": "Statements",
         "description": null,
         "fields": [
@@ -10347,7 +10976,35 @@
             "deprecationReason": null
           },
           {
-            "name": "deserveCardId",
+            "name": "digitalWallet",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "DigitalWallet",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "displayDollarAmount",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "displayFlair",
             "description": null,
             "args": [],
             "type": {
@@ -10359,7 +11016,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deserveCategoryId",
+            "name": "displayTitle",
             "description": null,
             "args": [],
             "type": {
@@ -10370,34 +11027,6 @@
                 "name": "String",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deserveTransactionId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "digitalWallet",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "DigitalWallet",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -10459,18 +11088,6 @@
             "deprecationReason": null
           },
           {
-            "name": "networkData",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "TransactionNetworkData",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "posType",
             "description": null,
             "args": [],
@@ -10527,9 +11144,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -10569,6 +11190,27 @@
         "possibleTypes": null
       },
       {
+        "kind": "UNION",
+        "name": "TransactionItem",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "PaymentTransaction",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "Transaction",
+            "ofType": null
+          }
+        ]
+      },
+      {
         "kind": "ENUM",
         "name": "TransactionLocality",
         "description": null,
@@ -10589,251 +11231,6 @@
             "deprecationReason": null
           }
         ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "TransactionNetworkData",
-        "description": null,
-        "fields": [
-          {
-            "name": "cardAcceptorIdCode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cardAcceptorNameLocation",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cardAcceptorTerminalId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "mccCategoryCode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantCategoryCode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantCategoryCodeDescription",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantCity",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantCountry",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantState",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantStreetAddress",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "merchantZipcode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "processorDeclineCode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "processorDeclineReason",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "TransactionNotificationSettings",
-        "description": null,
-        "fields": [
-          {
-            "name": "purchaseNotification",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TransactionNotificationSettingsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "purchaseNotification",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -10994,6 +11391,30 @@
         "description": null,
         "fields": [
           {
+            "name": "allTransactions",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "TransactionItem",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "count",
             "description": null,
             "args": [],
@@ -11021,6 +11442,18 @@
                 "name": "Boolean",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nextPageOffset",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11355,13 +11788,9 @@
             "name": "addressLine2",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,

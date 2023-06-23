@@ -16,12 +16,12 @@ const weight = createFontObject([
   "300",
   "300",
   "300",
-  "400",
   "300",
   "300",
   "300",
   "300",
-  "400",
+  "300",
+  "300",
 ]);
 const letterSpacing = createFontObject([0, 0, 0, 0, 0, 0, 0, 0, 0]);
 

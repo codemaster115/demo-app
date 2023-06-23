@@ -4,6 +4,7 @@ import { Icon } from "components/atoms";
 import { getColorValue } from "theme/utils";
 import { OfferDetailBottomSheet } from "components/organisms";
 import { MembershipTabStackNavigator } from "navigation/MembershipTabStackNavigator";
+import { HomeTabStackNavigator } from "navigation/HomeTabStackNavigator";
 import { BottomTabNavigatorParamList } from "./types";
 
 const BottomTab = createBottomTabNavigator<BottomTabNavigatorParamList>();
@@ -18,6 +19,9 @@ const BottomTabNavigator = () => (
           let iconName: IconName;
 
           switch (route.name) {
+            case "HomeTabStackNavigator":
+              iconName = "home";
+              break;
             case "MembershipTabStackNavigator":
               iconName = "membership";
               break;
@@ -39,6 +43,11 @@ const BottomTabNavigator = () => (
         },
       })}
     >
+      <BottomTab.Screen
+        options={{ headerShown: false }}
+        name={"HomeTabStackNavigator"}
+        component={HomeTabStackNavigator}
+      />
       <BottomTab.Screen
         name={"MembershipTabStackNavigator"}
         component={MembershipTabStackNavigator}

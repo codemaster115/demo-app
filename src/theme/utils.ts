@@ -14,7 +14,7 @@ const getSpaceValue = (spaceKey: Exclude<SpaceKey, "true">) => {
   return obj.val;
 };
 
-const getColorValue = (colorName: ColorName): ColorTokens =>
+const getColorValue = (colorName: ColorName): string =>
   // @ts-ignore
   getTokens({ prefixed: false }).color[colorName].val;
 

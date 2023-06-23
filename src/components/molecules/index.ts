@@ -5,3 +5,4 @@ export * from "./list-items";
 export * from "./Offer";
 export * from "./Restaurant";
 export * from "./SectionHeader";
+export * from "./Copyable";

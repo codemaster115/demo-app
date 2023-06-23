@@ -11,6 +11,7 @@ import {
 } from "../hooks";
 import { BaseBottomSheetRef, BottomSheetViewProps } from "../types";
 import { INITIAL_SNAP_POINTS } from "../constants";
+import { BackgroundBlurView } from "../BackgroundBlurView";
 import { bottomSheetStyles } from "../styles";
 
 type BottomSheetWithViewProps = Omit<BaseBottomSheetProps, "snapPoints"> &
@@ -63,6 +64,7 @@ const BottomSheetWithViewWithoutRef = (
       enablePanDownToClose={true}
       ref={bottomSheetRef}
       onChange={handleSheetChange}
+      backgroundComponent={BackgroundBlurView}
       handleIndicatorStyle={bottomSheetStyles.handleIndicator}
       style={bottomSheetStyles.baseBottomSheet}
       {...props}
