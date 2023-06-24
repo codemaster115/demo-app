@@ -5,6 +5,7 @@ const env = Object.freeze({
   internalSecret: process.env.INTERNAL_SECRET as string,
   hypercardAuthorization: process.env.HYPERCARD_AUTHORIZATION as string,
   authorizationToken: process.env.AUTHORIZATION_TOKEN as string,
+  mmkvEncryptionKey: process.env.MMKV_ENCRYPTION_KEY as string,
 });
 
 export { env };

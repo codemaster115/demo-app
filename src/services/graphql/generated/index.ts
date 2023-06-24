@@ -19,27 +19,23 @@ export type Scalars = {
   Float: number;
   Date: any;
   DateTime: any;
+  JSONObject: any;
   Void: any;
 };
 
 export type Account = {
   __typename?: "Account";
   accountOpenDate: Scalars["DateTime"];
-  approvalType: Scalars["String"];
   apr: Scalars["Float"];
   billingCycleDay: Scalars["Int"];
   chaUrl: Scalars["String"];
-  cpAccountNumber: Scalars["String"];
-  createdAt: Scalars["DateTime"];
   creditLimit: Scalars["Float"];
   currentBalance: Scalars["Float"];
-  dateCreated: Scalars["Date"];
   daysPastDueDate: Scalars["Int"];
   dueAmount: Scalars["Float"];
   dueDate: Scalars["Date"];
   dueDateUtc: Scalars["DateTime"];
   highestCreditUtilised: Scalars["Float"];
-  id: Scalars["String"];
   minimumPayment: Scalars["Float"];
   overLimitCredit: Scalars["Float"];
   reason?: Maybe<AccountStatusReason>;
@@ -47,9 +43,6 @@ export type Account = {
   remainingStatementBalance: Scalars["Float"];
   statementBalance: Scalars["Float"];
   status?: Maybe<AccountStatus>;
-  updatedAt: Scalars["DateTime"];
-  usage?: Maybe<AccountUsage>;
-  userId: Scalars["String"];
 };
 
 export enum AccountStatus {
@@ -85,11 +78,6 @@ export enum AccountStatusReason {
   SuspectedThirdPartyFraud = "suspectedThirdPartyFraud",
   TermsOfUseViolation = "termsOfUseViolation",
   ThirdPartyFraud = "thirdPartyFraud",
-}
-
-export enum AccountUsage {
-  Global = "global",
-  Local = "local",
 }
 
 export type Address = {
@@ -166,7 +154,6 @@ export type BaseError = Error & {
 
 export type Card = {
   __typename?: "Card";
-  accountId: Scalars["String"];
   activatedAt?: Maybe<Scalars["DateTime"]>;
   cardDesign: Scalars["String"];
   cardNumber: Scalars["String"];
@@ -199,10 +186,15 @@ export enum CardCancelReason {
 
 export type CardReplacement = {
   __typename?: "CardReplacement";
-  newCard: Card;
+  newCard: ShortCard;
   note: Scalars["String"];
-  oldCard: Card;
+  oldCard: ShortCard;
 };
+
+export enum CardReplacementReason {
+  Fraud = "fraud",
+  LostOrStolen = "lostOrStolen",
+}
 
 export enum CardStatus {
   Active = "active",
@@ -219,26 +211,23 @@ export enum CardStatus {
 
 export type Cardholder = {
   __typename?: "Cardholder";
-  createdAt?: Maybe<Scalars["DateTime"]>;
+  cardholderId: Scalars["String"];
   dateOfBirth: Scalars["Date"];
   dislikedRewardRuleIds: Array<Scalars["Int"]>;
   email: Scalars["String"];
-  employmentStartDate?: Maybe<Scalars["DateTime"]>;
+  employmentStartDate?: Maybe<Scalars["Date"]>;
   firstName: Scalars["String"];
-  id: Scalars["String"];
   lastName: Scalars["String"];
   likedRewardRuleIds: Array<Scalars["Int"]>;
   middleName?: Maybe<Scalars["String"]>;
   nameOnCard?: Maybe<Scalars["String"]>;
   paperlessStatement: Scalars["Boolean"];
   phoneNumber: Scalars["String"];
+  referralLink: Scalars["String"];
   residentialAddress: CardholderAddress;
   shippingAddress: CardholderAddress;
-  ssn?: Maybe<Scalars["String"]>;
-  ssnLastFour?: Maybe<Scalars["String"]>;
-  state?: Maybe<DeserveProfileState>;
   stytchUserId: Scalars["String"];
-  updatedAt?: Maybe<Scalars["DateTime"]>;
+  userId: Scalars["String"];
 };
 
 export type CardholderAddress = {
@@ -246,13 +235,16 @@ export type CardholderAddress = {
   addressLine1: Scalars["String"];
   addressLine2?: Maybe<Scalars["String"]>;
   city: Scalars["String"];
-  country: Scalars["String"];
-  id: Scalars["String"];
-  sequence: Scalars["Int"];
   state: Scalars["String"];
   type: AddressType;
   zip: Scalars["String"];
 };
+
+export enum CatalogCategory {
+  All = "all",
+  Popular = "popular",
+  Premium = "premium",
+}
 
 export type Category = {
   __typename?: "Category";
@@ -281,12 +273,6 @@ export type CreateDisputeInput = {
   transactionId: Scalars["Int"];
 };
 
-export type CreateDueDatePaymentScheduleInput = {
-  amount?: InputMaybe<Scalars["String"]>;
-  methodId: Scalars["String"];
-  type: PaymentType;
-};
-
 export type CreateInstantPaymentInput = {
   amount?: InputMaybe<Scalars["String"]>;
   methodId: Scalars["String"];
@@ -296,14 +282,6 @@ export type CreateInstantPaymentInput = {
 export enum CreditIndicator {
   Credit = "credit",
   Debit = "debit",
-}
-
-export enum DeserveProfileState {
-  Abandoned = "abandoned",
-  ActiveAccount = "activeAccount",
-  ClosedAccount = "closedAccount",
-  Complete = "complete",
-  Incomplete = "incomplete",
 }
 
 export enum DigitalWallet {
@@ -316,7 +294,6 @@ export type Dispute = {
   activity?: Maybe<Array<DisputeActivity>>;
   amount: Scalars["String"];
   createdAt?: Maybe<Scalars["DateTime"]>;
-  deserveTransactionId: Scalars["String"];
   id: Scalars["String"];
   merchantContactedDate?: Maybe<Scalars["Date"]>;
   notes: Scalars["String"];
@@ -405,13 +382,13 @@ export type Employee = {
   __typename?: "Employee";
   address?: Maybe<Address>;
   dateOfBirth?: Maybe<Scalars["DateTime"]>;
-  firstName?: Maybe<Scalars["String"]>;
+  firstName: Scalars["String"];
   id: Scalars["ID"];
-  lastName?: Maybe<Scalars["String"]>;
+  lastName: Scalars["String"];
   organizationId: Scalars["String"];
   phoneNumber?: Maybe<Scalars["String"]>;
   title?: Maybe<Scalars["String"]>;
-  workEmail?: Maybe<Scalars["String"]>;
+  workEmail: Scalars["String"];
 };
 
 export type EmployeeApplicationStartedContext = {
@@ -428,24 +405,19 @@ export type Error = {
 export type ExternalMerchant = {
   __typename?: "ExternalMerchant";
   addressDetails?: Maybe<Scalars["String"]>;
-  cardacceptorNameLocation?: Maybe<Scalars["String"]>;
   category: Category;
   city?: Maybe<Scalars["String"]>;
   country?: Maybe<Scalars["String"]>;
   coverImage?: Maybe<Scalars["String"]>;
-  cpMerchantCategoryCode?: Maybe<Scalars["String"]>;
   displayName: Scalars["String"];
   formattedAddress?: Maybe<Scalars["String"]>;
   googleMapUrl?: Maybe<Scalars["String"]>;
   id: Scalars["String"];
   latitude?: Maybe<Scalars["String"]>;
   longitude?: Maybe<Scalars["String"]>;
-  merchantBrand?: Maybe<ExternalMerchantBrand>;
   merchantType: Scalars["String"];
   name: Scalars["String"];
   phoneNumber?: Maybe<Scalars["String"]>;
-  secondaryMerchantBrand?: Maybe<ExternalMerchantBrand>;
-  secondaryMerchantName?: Maybe<Scalars["String"]>;
   state?: Maybe<Scalars["String"]>;
   streetName?: Maybe<Scalars["String"]>;
   streetNumber?: Maybe<Scalars["String"]>;
@@ -453,17 +425,90 @@ export type ExternalMerchant = {
   zipcode?: Maybe<Scalars["String"]>;
 };
 
-export type ExternalMerchantBrand = {
-  __typename?: "ExternalMerchantBrand";
-  id: Scalars["String"];
-  logoImage?: Maybe<Scalars["String"]>;
-  name: Scalars["String"];
+export type FeatureFlags = {
+  __typename?: "FeatureFlags";
+  expenseManagementShown: Scalars["Boolean"];
+};
+
+export type GiftCardBrand = {
+  __typename?: "GiftCardBrand";
+  alwaysShowDisclaimer: Scalars["Boolean"];
+  brandKey: Scalars["String"];
+  brandName: Scalars["String"];
+  description: Scalars["String"];
+  disclaimer: Scalars["String"];
+  disclaimerInstructions?: Maybe<Scalars["String"]>;
+  displayInstructions?: Maybe<Scalars["String"]>;
+  effectiveDollarPerPointsValue: Scalars["Float"];
+  imageUrl: Scalars["String"];
+  /** List of gift card details for the brand */
+  items: Array<GiftCardItem>;
+  popularityRank: Scalars["Int"];
+  shortDescription: Scalars["String"];
+  terms: Scalars["String"];
+  termsAndConditionsInstructions?: Maybe<Scalars["String"]>;
+};
+
+export type GiftCardCatalog = {
+  __typename?: "GiftCardCatalog";
+  /** List of brands in the catalog */
+  brandList: Array<GiftCardBrand>;
+  category: CatalogCategory;
+  maximumRedemptionValue: Scalars["Float"];
+  minimumRedemptionValue: Scalars["Float"];
+};
+
+export type GiftCardCreateOrderInputSchema = {
+  dollarValue: Scalars["Int"];
+  idempotencyKey?: InputMaybe<Scalars["String"]>;
+  utid: Scalars["String"];
+};
+
+export type GiftCardItem = {
+  __typename?: "GiftCardItem";
+  faceValue: Scalars["Float"];
+  isWholeAmountValueRequired: Scalars["Boolean"];
+  pointsValue: Scalars["Float"];
+  redemptionInstructions: Scalars["String"];
+  rewardName: Scalars["String"];
+  rewardType: Scalars["String"];
+  utid: Scalars["String"];
+  valueType: Scalars["String"];
+};
+
+export type GiftCardOrder = {
+  __typename?: "GiftCardOrder";
+  message?: Maybe<Scalars["String"]>;
+  redemptionInstructions?: Maybe<Scalars["String"]>;
+  status: Scalars["String"];
+};
+
+export type GiftCardWallet = {
+  __typename?: "GiftCardWallet";
+  brandName: Scalars["String"];
+  createdAt: Scalars["DateTime"];
+  /** Gift Card credentials */
+  credentials: Array<Scalars["JSONObject"]>;
+  externalRefID: Scalars["String"];
+  faceValue: Scalars["Int"];
+  hexColor?: Maybe<Scalars["String"]>;
+  imageUrl: Scalars["String"];
 };
 
 export type HypercardMerchant = {
   __typename?: "HypercardMerchant";
   id: Scalars["Int"];
   logoImageUrl: Scalars["String"];
+};
+
+export type Insurance = {
+  __typename?: "Insurance";
+  contactNumber?: Maybe<Scalars["String"]>;
+  flair: Scalars["String"];
+  iconUrl: Scalars["String"];
+  longDetails?: Maybe<Scalars["String"]>;
+  shortDetails: Scalars["String"];
+  title: Scalars["String"];
 };
 
 export type IntegerCursorPaginationInput = {
@@ -474,20 +519,18 @@ export type IntegerCursorPaginationInput = {
 export type Mutation = {
   __typename?: "Mutation";
   activateCard: MutationActivateCardResult;
-  cancelCard: MutationCancelCardResult;
-  completePhoneNumberUpdate: MutationCompletePhoneNumberUpdateResult;
+  completePhoneNumberUpdate?: Maybe<MutationCompletePhoneNumberUpdateResult>;
   createACHPaymentMethod: MutationCreateAchPaymentMethodResult;
   createDispute: MutationCreateDisputeResult;
-  createDueDatePaymentSchedule: MutationCreateDueDatePaymentScheduleResult;
-  createInstantPaymentSchedule: MutationCreateInstantPaymentScheduleResult;
+  createGiftCardOrder: MutationCreateGiftCardOrderResult;
+  createInstantPayment: MutationCreateInstantPaymentResult;
   deletePaymentMethod: MutationDeletePaymentMethodResult;
-  deletePaymentSchedule: MutationDeletePaymentScheduleResult;
-  redeemPoints: MutationRedeemPointsResult;
-  registerOfferAnalytic: Scalars["Boolean"];
+  hideGiftcardWallet?: Maybe<MutationHideGiftcardWalletResult>;
+  redeemPointsForCashback?: Maybe<MutationRedeemPointsForCashbackResult>;
+  referColleagues?: Maybe<MutationReferColleaguesResult>;
+  registerOfferAnalytic: MutationRegisterOfferAnalyticResult;
+  removeAutoPaymentSchedule: MutationRemoveAutoPaymentScheduleResult;
   replaceCard: MutationReplaceCardResult;
-  reportCardFraud: MutationReportCardFraudResult;
-  reportLostOrStolenCard: MutationReportLostOrStolenCardResult;
-  resolveDispute: MutationResolveDisputeResult;
   sendOTP: MutationSendOtpResult;
   simulateTransaction: MutationSimulateTransactionResult;
   startEmployeeApplication: MutationStartEmployeeApplicationResult;
@@ -506,13 +549,7 @@ export type Mutation = {
 };
 
 export type MutationActivateCardArgs = {
-  cardId: Scalars["String"];
   last4Digits: Scalars["String"];
-};
-
-export type MutationCancelCardArgs = {
-  cardId: Scalars["String"];
-  reason: CardCancelReason;
 };
 
 export type MutationCompletePhoneNumberUpdateArgs = {
@@ -527,11 +564,11 @@ export type MutationCreateDisputeArgs = {
   input: CreateDisputeInput;
 };
 
-export type MutationCreateDueDatePaymentScheduleArgs = {
-  input: CreateDueDatePaymentScheduleInput;
+export type MutationCreateGiftCardOrderArgs = {
+  input: GiftCardCreateOrderInputSchema;
 };
 
-export type MutationCreateInstantPaymentScheduleArgs = {
+export type MutationCreateInstantPaymentArgs = {
   input: CreateInstantPaymentInput;
 };
 
@@ -539,12 +576,16 @@ export type MutationDeletePaymentMethodArgs = {
   methodId: Scalars["String"];
 };
 
-export type MutationDeletePaymentScheduleArgs = {
-  scheduleId: Scalars["String"];
+export type MutationHideGiftcardWalletArgs = {
+  externalRefID: Scalars["String"];
 };
 
-export type MutationRedeemPointsArgs = {
+export type MutationRedeemPointsForCashbackArgs = {
   amount: Scalars["Int"];
+};
+
+export type MutationReferColleaguesArgs = {
+  inviteeEmails: Array<Scalars["String"]>;
 };
 
 export type MutationRegisterOfferAnalyticArgs = {
@@ -552,25 +593,13 @@ export type MutationRegisterOfferAnalyticArgs = {
   rewardRuleId: Scalars["Int"];
 };
 
+export type MutationRemoveAutoPaymentScheduleArgs = {
+  scheduleId: Scalars["String"];
+};
+
 export type MutationReplaceCardArgs = {
-  cardId: Scalars["String"];
-  isDamaged: Scalars["Boolean"];
-  isPhysical: Scalars["Boolean"];
-};
-
-export type MutationReportCardFraudArgs = {
-  cardId: Scalars["String"];
-};
-
-export type MutationReportLostOrStolenCardArgs = {
-  cardId: Scalars["String"];
-};
-
-export type MutationResolveDisputeArgs = {
-  accountId: Scalars["String"];
-  disputeId: Scalars["String"];
-  resolution: DisputeResolution;
-  resolutionDescription: DisputeResolutionDescription;
+  newShippingAddress?: InputMaybe<UpdateCardholderAddressInput>;
+  reason: CardReplacementReason;
 };
 
 export type MutationSendOtpArgs = {
@@ -597,6 +626,7 @@ export type MutationSubmitEmployeeApplicationArgs = {
   demographic: ApplicationDemographicInput;
   financialInfo: ApplicationFinancialInfoInput;
   organizationId: Scalars["String"];
+  referralCode?: InputMaybe<Scalars["String"]>;
   testEmail: Scalars["String"];
 };
 
@@ -608,16 +638,15 @@ export type MutationSubmitWaitlistUserApplicationArgs = {
   applicationId: Scalars["String"];
   demographic: ApplicationDemographicInput;
   financialInfo: ApplicationFinancialInfoInput;
+  referralCode?: InputMaybe<Scalars["String"]>;
 };
 
 export type MutationUpdateCardPinArgs = {
-  cardId: Scalars["String"];
   pin: Scalars["String"];
 };
 
 export type MutationUpdateFreezeStatusArgs = {
-  cardId: Scalars["String"];
-  freeze: Scalars["Boolean"];
+  shouldFreeze: Scalars["Boolean"];
 };
 
 export type MutationUpdateNotificationSettingsArgs = {
@@ -647,16 +676,6 @@ export type MutationActivateCardResult =
 
 export type MutationActivateCardSuccess = {
   __typename?: "MutationActivateCardSuccess";
-  data: Scalars["Boolean"];
-};
-
-export type MutationCancelCardResult =
-  | BaseError
-  | MutationCancelCardSuccess
-  | ValidationError;
-
-export type MutationCancelCardSuccess = {
-  __typename?: "MutationCancelCardSuccess";
   data: Scalars["Boolean"];
 };
 
@@ -690,23 +709,23 @@ export type MutationCreateDisputeSuccess = {
   data: Dispute;
 };
 
-export type MutationCreateDueDatePaymentScheduleResult =
+export type MutationCreateGiftCardOrderResult =
   | BaseError
-  | MutationCreateDueDatePaymentScheduleSuccess
+  | MutationCreateGiftCardOrderSuccess
   | ValidationError;
 
-export type MutationCreateDueDatePaymentScheduleSuccess = {
-  __typename?: "MutationCreateDueDatePaymentScheduleSuccess";
-  data: PaymentSchedule;
+export type MutationCreateGiftCardOrderSuccess = {
+  __typename?: "MutationCreateGiftCardOrderSuccess";
+  data: GiftCardOrder;
 };
 
-export type MutationCreateInstantPaymentScheduleResult =
+export type MutationCreateInstantPaymentResult =
   | BaseError
-  | MutationCreateInstantPaymentScheduleSuccess
+  | MutationCreateInstantPaymentSuccess
   | ValidationError;
 
-export type MutationCreateInstantPaymentScheduleSuccess = {
-  __typename?: "MutationCreateInstantPaymentScheduleSuccess";
+export type MutationCreateInstantPaymentSuccess = {
+  __typename?: "MutationCreateInstantPaymentSuccess";
   data: PaymentSchedule;
 };
 
@@ -720,24 +739,54 @@ export type MutationDeletePaymentMethodSuccess = {
   data: Scalars["Boolean"];
 };
 
-export type MutationDeletePaymentScheduleResult =
+export type MutationHideGiftcardWalletResult =
   | BaseError
-  | MutationDeletePaymentScheduleSuccess
+  | MutationHideGiftcardWalletSuccess
   | ValidationError;
 
-export type MutationDeletePaymentScheduleSuccess = {
-  __typename?: "MutationDeletePaymentScheduleSuccess";
+export type MutationHideGiftcardWalletSuccess = {
+  __typename?: "MutationHideGiftcardWalletSuccess";
+  data: Scalars["Void"];
+};
+
+export type MutationRedeemPointsForCashbackResult =
+  | BaseError
+  | MutationRedeemPointsForCashbackSuccess
+  | ValidationError;
+
+export type MutationRedeemPointsForCashbackSuccess = {
+  __typename?: "MutationRedeemPointsForCashbackSuccess";
+  data: Scalars["Void"];
+};
+
+export type MutationReferColleaguesResult =
+  | BaseError
+  | MutationReferColleaguesSuccess
+  | ValidationError;
+
+export type MutationReferColleaguesSuccess = {
+  __typename?: "MutationReferColleaguesSuccess";
+  data: Scalars["Void"];
+};
+
+export type MutationRegisterOfferAnalyticResult =
+  | BaseError
+  | MutationRegisterOfferAnalyticSuccess
+  | ValidationError;
+
+export type MutationRegisterOfferAnalyticSuccess = {
+  __typename?: "MutationRegisterOfferAnalyticSuccess";
   data: Scalars["Boolean"];
 };
 
-export type MutationRedeemPointsResult =
+export type MutationRemoveAutoPaymentScheduleResult =
   | BaseError
-  | MutationRedeemPointsSuccess
+  | MutationRemoveAutoPaymentScheduleSuccess
   | ValidationError;
 
-export type MutationRedeemPointsSuccess = {
-  __typename?: "MutationRedeemPointsSuccess";
-  data: Scalars["Void"];
+export type MutationRemoveAutoPaymentScheduleSuccess = {
+  __typename?: "MutationRemoveAutoPaymentScheduleSuccess";
+  data: Scalars["Boolean"];
 };
 
 export type MutationReplaceCardResult =
@@ -748,36 +797,6 @@ export type MutationReplaceCardResult =
 export type MutationReplaceCardSuccess = {
   __typename?: "MutationReplaceCardSuccess";
   data: CardReplacement;
-};
-
-export type MutationReportCardFraudResult =
-  | BaseError
-  | MutationReportCardFraudSuccess
-  | ValidationError;
-
-export type MutationReportCardFraudSuccess = {
-  __typename?: "MutationReportCardFraudSuccess";
-  data: CardReplacement;
-};
-
-export type MutationReportLostOrStolenCardResult =
-  | BaseError
-  | MutationReportLostOrStolenCardSuccess
-  | ValidationError;
-
-export type MutationReportLostOrStolenCardSuccess = {
-  __typename?: "MutationReportLostOrStolenCardSuccess";
-  data: CardReplacement;
-};
-
-export type MutationResolveDisputeResult =
-  | BaseError
-  | MutationResolveDisputeSuccess
-  | ValidationError;
-
-export type MutationResolveDisputeSuccess = {
-  __typename?: "MutationResolveDisputeSuccess";
-  data: Dispute;
 };
 
 export type MutationSendOtpResult = BaseError | MutationSendOtpSuccess | ValidationError;
@@ -929,15 +948,15 @@ export type MutationWithdrawDisputeSuccess = {
 
 export type NotificationSettings = {
   __typename?: "NotificationSettings";
-  rewards: RewardNotificationSettings;
-  statements: StatementNotificationSettings;
-  transactions: TransactionNotificationSettings;
+  promotions: Scalars["Boolean"];
+  rewards: Scalars["Boolean"];
+  transactions: Scalars["Boolean"];
 };
 
 export type NotificationSettingsInput = {
-  rewards?: InputMaybe<RewardNotificationSettingsInput>;
-  statements?: InputMaybe<StatementNotificationSettingsInput>;
-  transactions?: InputMaybe<TransactionNotificationSettingsInput>;
+  promotions?: InputMaybe<Scalars["Boolean"]>;
+  rewards?: InputMaybe<Scalars["Boolean"]>;
+  transactions?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type Offer = {
@@ -947,7 +966,6 @@ export type Offer = {
   externalMerchant?: Maybe<ExternalMerchant>;
   flair?: Maybe<OfferFlair>;
   hypercardMerchant?: Maybe<HypercardMerchant>;
-  identifier: Scalars["String"];
   longDetails?: Maybe<Scalars["String"]>;
   restaurantOffer?: Maybe<RestaurantOffer>;
   reward: Scalars["String"];
@@ -958,6 +976,7 @@ export type Offer = {
 
 export enum OfferCategory {
   Dining = "dining",
+  KFactor = "kFactor",
   Lifestyle = "lifestyle",
   Wellness = "wellness",
 }
@@ -970,6 +989,12 @@ export enum OfferFlair {
 export type OffsetPaginationInput = {
   offset?: InputMaybe<Scalars["Int"]>;
   pageSize?: InputMaybe<Scalars["Int"]>;
+};
+
+export type Organization = {
+  __typename?: "Organization";
+  domains: Array<Scalars["String"]>;
+  name: Scalars["String"];
 };
 
 export type PaymentMethod = {
@@ -1030,12 +1055,12 @@ export enum PaymentScheduleStatus {
 
 export type PaymentTransaction = {
   __typename?: "PaymentTransaction";
-  amount: Scalars["Float"];
+  amountInDollars: Scalars["Float"];
   completedAt?: Maybe<Scalars["DateTime"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
-  deserveAccountId: Scalars["String"];
-  deservePaymentMethodId?: Maybe<Scalars["String"]>;
-  deservePaymentScheduleId?: Maybe<Scalars["String"]>;
+  displayDollarAmount: Scalars["String"];
+  displayFlair?: Maybe<Scalars["String"]>;
+  displayTitle: Scalars["String"];
   frequency?: Maybe<Scalars["String"]>;
   id: Scalars["Int"];
   initiatedAt?: Maybe<Scalars["DateTime"]>;
@@ -1071,6 +1096,12 @@ export enum PaymentType {
   StatementBalance = "statementBalance",
 }
 
+export type PointsMultiplier = {
+  __typename?: "PointsMultiplier";
+  multiplier: Scalars["Int"];
+  offer: Offer;
+};
+
 export enum PosType {
   Online = "online",
   Physical = "physical",
@@ -1080,45 +1111,30 @@ export enum PosType {
 
 export type Query = {
   __typename?: "Query";
-  account: Account;
-  achPaymentMethods: Array<PaymentMethod>;
+  account: QueryAccountResult;
   activeAutoPayment?: Maybe<QueryActiveAutoPaymentResult>;
-  card: QueryCardResult;
+  activePointsMultiplier: QueryActivePointsMultiplierResult;
   cardArt: QueryCardArtResult;
-  cardholder?: Maybe<Cardholder>;
-  cards: QueryCardsResult;
-  categories?: Maybe<Array<Category>>;
-  detokenizedCard: QueryDetokenizedCardResult;
-  dispute: QueryDisputeResult;
-  disputes: Array<Dispute>;
-  externalMerchant?: Maybe<QueryExternalMerchantResult>;
+  cardholder?: Maybe<QueryCardholderResult>;
+  featureFlags: QueryFeatureFlagsResult;
+  giftCardCatalog: QueryGiftCardCatalogResult;
+  giftCardWallet: QueryGiftCardWalletResult;
   healthCheck: Scalars["String"];
-  notificationSettings?: Maybe<NotificationSettings>;
+  insurances: QueryInsurancesResult;
+  netSavingsThisMonth: QueryNetSavingsThisMonthResult;
+  notificationSettings: QueryNotificationSettingsResult;
   offers: QueryOffersResult;
-  paymentMethods: Array<PaymentMethod>;
-  paymentSchedules: QueryPaymentSchedulesResult;
+  organization?: Maybe<QueryOrganizationResult>;
+  paymentMethods: QueryPaymentMethodsResult;
+  pointToDollarConversion: QueryPointToDollarConversionResult;
   primaryCard?: Maybe<QueryPrimaryCardResult>;
+  recommendedReferrals: QueryRecommendedReferralsResult;
+  referralOffer: QueryReferralOfferResult;
   statement: QueryStatementResult;
   statements: QueryStatementsResult;
-  totalPoints?: Maybe<Scalars["Int"]>;
+  totalPoints?: Maybe<QueryTotalPointsResult>;
   transaction?: Maybe<QueryTransactionResult>;
   transactions: QueryTransactionsResult;
-};
-
-export type QueryCardArgs = {
-  cardId: Scalars["String"];
-};
-
-export type QueryDetokenizedCardArgs = {
-  cardId: Scalars["String"];
-};
-
-export type QueryDisputeArgs = {
-  disputeId: Scalars["String"];
-};
-
-export type QueryExternalMerchantArgs = {
-  merchantId: Scalars["String"];
 };
 
 export type QueryOffersArgs = {
@@ -1128,9 +1144,13 @@ export type QueryOffersArgs = {
   restaurantCity?: InputMaybe<RestaurantCity>;
 };
 
-export type QueryPaymentSchedulesArgs = {
-  frequency?: InputMaybe<PaymentScheduleFrequency>;
-  status?: InputMaybe<PaymentScheduleStatus>;
+export type QueryPrimaryCardArgs = {
+  detokenized?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type QueryRecommendedReferralsArgs = {
+  pagination?: InputMaybe<OffsetPaginationInput>;
+  searchText?: InputMaybe<Scalars["String"]>;
 };
 
 export type QueryStatementArgs = {
@@ -1142,17 +1162,22 @@ export type QueryStatementsArgs = {
 };
 
 export type QueryTransactionArgs = {
-  includeMerchant?: InputMaybe<Scalars["Boolean"]>;
   includeReward?: InputMaybe<Scalars["Boolean"]>;
   transactionId: Scalars["Int"];
 };
 
 export type QueryTransactionsArgs = {
   filters?: InputMaybe<TransactionsFilterInput>;
-  includeMerchants?: InputMaybe<Scalars["Boolean"]>;
   includeRewards?: InputMaybe<Scalars["Boolean"]>;
   pagination?: InputMaybe<OffsetPaginationInput>;
   sort?: InputMaybe<TransactionsSortInput>;
+};
+
+export type QueryAccountResult = BaseError | QueryAccountSuccess | ValidationError;
+
+export type QueryAccountSuccess = {
+  __typename?: "QueryAccountSuccess";
+  data: Account;
 };
 
 export type QueryActiveAutoPaymentResult =
@@ -1165,6 +1190,16 @@ export type QueryActiveAutoPaymentSuccess = {
   data: PaymentSchedule;
 };
 
+export type QueryActivePointsMultiplierResult =
+  | BaseError
+  | QueryActivePointsMultiplierSuccess
+  | ValidationError;
+
+export type QueryActivePointsMultiplierSuccess = {
+  __typename?: "QueryActivePointsMultiplierSuccess";
+  data: PointsMultiplier;
+};
+
 export type QueryCardArtResult = BaseError | QueryCardArtSuccess | ValidationError;
 
 export type QueryCardArtSuccess = {
@@ -1172,45 +1207,68 @@ export type QueryCardArtSuccess = {
   data: CardArt;
 };
 
-export type QueryCardResult = BaseError | QueryCardSuccess | ValidationError;
+export type QueryCardholderResult = BaseError | QueryCardholderSuccess | ValidationError;
 
-export type QueryCardSuccess = {
-  __typename?: "QueryCardSuccess";
-  data: Card;
+export type QueryCardholderSuccess = {
+  __typename?: "QueryCardholderSuccess";
+  data: Cardholder;
 };
 
-export type QueryCardsResult = BaseError | QueryCardsSuccess | ValidationError;
-
-export type QueryCardsSuccess = {
-  __typename?: "QueryCardsSuccess";
-  data: Array<Card>;
-};
-
-export type QueryDetokenizedCardResult =
+export type QueryFeatureFlagsResult =
   | BaseError
-  | QueryDetokenizedCardSuccess
+  | QueryFeatureFlagsSuccess
   | ValidationError;
 
-export type QueryDetokenizedCardSuccess = {
-  __typename?: "QueryDetokenizedCardSuccess";
-  data: Card;
+export type QueryFeatureFlagsSuccess = {
+  __typename?: "QueryFeatureFlagsSuccess";
+  data: FeatureFlags;
 };
 
-export type QueryDisputeResult = BaseError | QueryDisputeSuccess | ValidationError;
-
-export type QueryDisputeSuccess = {
-  __typename?: "QueryDisputeSuccess";
-  data: Dispute;
-};
-
-export type QueryExternalMerchantResult =
+export type QueryGiftCardCatalogResult =
   | BaseError
-  | QueryExternalMerchantSuccess
+  | QueryGiftCardCatalogSuccess
   | ValidationError;
 
-export type QueryExternalMerchantSuccess = {
-  __typename?: "QueryExternalMerchantSuccess";
-  data: ExternalMerchant;
+export type QueryGiftCardCatalogSuccess = {
+  __typename?: "QueryGiftCardCatalogSuccess";
+  data: Array<GiftCardCatalog>;
+};
+
+export type QueryGiftCardWalletResult =
+  | BaseError
+  | QueryGiftCardWalletSuccess
+  | ValidationError;
+
+export type QueryGiftCardWalletSuccess = {
+  __typename?: "QueryGiftCardWalletSuccess";
+  data: Array<GiftCardWallet>;
+};
+
+export type QueryInsurancesResult = BaseError | QueryInsurancesSuccess | ValidationError;
+
+export type QueryInsurancesSuccess = {
+  __typename?: "QueryInsurancesSuccess";
+  data: Array<Insurance>;
+};
+
+export type QueryNetSavingsThisMonthResult =
+  | BaseError
+  | QueryNetSavingsThisMonthSuccess
+  | ValidationError;
+
+export type QueryNetSavingsThisMonthSuccess = {
+  __typename?: "QueryNetSavingsThisMonthSuccess";
+  data: Scalars["Float"];
+};
+
+export type QueryNotificationSettingsResult =
+  | BaseError
+  | QueryNotificationSettingsSuccess
+  | ValidationError;
+
+export type QueryNotificationSettingsSuccess = {
+  __typename?: "QueryNotificationSettingsSuccess";
+  data: NotificationSettings;
 };
 
 export type QueryOffersResult = BaseError | QueryOffersSuccess | ValidationError;
@@ -1220,14 +1278,34 @@ export type QueryOffersSuccess = {
   data: Array<Offer>;
 };
 
-export type QueryPaymentSchedulesResult =
+export type QueryOrganizationResult =
   | BaseError
-  | QueryPaymentSchedulesSuccess
+  | QueryOrganizationSuccess
   | ValidationError;
 
-export type QueryPaymentSchedulesSuccess = {
-  __typename?: "QueryPaymentSchedulesSuccess";
-  data: Array<PaymentSchedule>;
+export type QueryOrganizationSuccess = {
+  __typename?: "QueryOrganizationSuccess";
+  data: Organization;
+};
+
+export type QueryPaymentMethodsResult =
+  | BaseError
+  | QueryPaymentMethodsSuccess
+  | ValidationError;
+
+export type QueryPaymentMethodsSuccess = {
+  __typename?: "QueryPaymentMethodsSuccess";
+  data: Array<PaymentMethod>;
+};
+
+export type QueryPointToDollarConversionResult =
+  | BaseError
+  | QueryPointToDollarConversionSuccess
+  | ValidationError;
+
+export type QueryPointToDollarConversionSuccess = {
+  __typename?: "QueryPointToDollarConversionSuccess";
+  data: Scalars["Float"];
 };
 
 export type QueryPrimaryCardResult =
@@ -1238,6 +1316,26 @@ export type QueryPrimaryCardResult =
 export type QueryPrimaryCardSuccess = {
   __typename?: "QueryPrimaryCardSuccess";
   data: Card;
+};
+
+export type QueryRecommendedReferralsResult =
+  | BaseError
+  | QueryRecommendedReferralsSuccess
+  | ValidationError;
+
+export type QueryRecommendedReferralsSuccess = {
+  __typename?: "QueryRecommendedReferralsSuccess";
+  data: Array<ReferralEmployee>;
+};
+
+export type QueryReferralOfferResult =
+  | BaseError
+  | QueryReferralOfferSuccess
+  | ValidationError;
+
+export type QueryReferralOfferSuccess = {
+  __typename?: "QueryReferralOfferSuccess";
+  data: Offer;
 };
 
 export type QueryStatementResult = BaseError | QueryStatementSuccess | ValidationError;
@@ -1252,6 +1350,16 @@ export type QueryStatementsResult = BaseError | QueryStatementsSuccess | Validat
 export type QueryStatementsSuccess = {
   __typename?: "QueryStatementsSuccess";
   data: Statements;
+};
+
+export type QueryTotalPointsResult =
+  | BaseError
+  | QueryTotalPointsSuccess
+  | ValidationError;
+
+export type QueryTotalPointsSuccess = {
+  __typename?: "QueryTotalPointsSuccess";
+  data: Scalars["Int"];
 };
 
 export type QueryTransactionResult =
@@ -1274,8 +1382,17 @@ export type QueryTransactionsSuccess = {
   data: Transactions;
 };
 
+export type ReferralEmployee = {
+  __typename?: "ReferralEmployee";
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  workEmail: Scalars["String"];
+};
+
 export enum RestaurantCity {
-  NewYork = "newYork",
+  Austin = "austin",
+  Miami = "miami",
+  Nyc = "nyc",
 }
 
 export type RestaurantOffer = {
@@ -1302,13 +1419,10 @@ export enum RewardApplicationMethod {
   Points = "points",
 }
 
-export type RewardNotificationSettings = {
-  __typename?: "RewardNotificationSettings";
-  newTransactionReward: Scalars["Boolean"];
-};
-
-export type RewardNotificationSettingsInput = {
-  newTransactionReward: Scalars["Boolean"];
+export type ShortCard = {
+  __typename?: "ShortCard";
+  id: Scalars["String"];
+  status: CardStatus;
 };
 
 export type Statement = {
@@ -1334,19 +1448,6 @@ export type Statement = {
   statementMinimum: Scalars["String"];
 };
 
-export type StatementNotificationSettings = {
-  __typename?: "StatementNotificationSettings";
-  paymentDue: Scalars["Boolean"];
-  paymentReceived: Scalars["Boolean"];
-  statementReady: Scalars["Boolean"];
-};
-
-export type StatementNotificationSettingsInput = {
-  paymentDue: Scalars["Boolean"];
-  paymentReceived: Scalars["Boolean"];
-  statementReady: Scalars["Boolean"];
-};
-
 export type Statements = {
   __typename?: "Statements";
   count: Scalars["Int"];
@@ -1366,56 +1467,29 @@ export type Transaction = {
   cardLast4Digits?: Maybe<Scalars["String"]>;
   cardholderId: Scalars["String"];
   creditIndicator: CreditIndicator;
-  deserveCardId?: Maybe<Scalars["String"]>;
-  deserveCategoryId: Scalars["String"];
-  deserveTransactionId: Scalars["String"];
   digitalWallet?: Maybe<DigitalWallet>;
+  displayDollarAmount: Scalars["String"];
+  displayFlair?: Maybe<Scalars["String"]>;
+  displayTitle: Scalars["String"];
   dispute?: Maybe<Dispute>;
   externalMerchant?: Maybe<ExternalMerchant>;
   hypercardCategoryIconUrl: Scalars["String"];
   id: Scalars["Int"];
-  networkData?: Maybe<TransactionNetworkData>;
   posType?: Maybe<Scalars["String"]>;
   reward?: Maybe<TransactionReward>;
   settledAt?: Maybe<Scalars["DateTime"]>;
   status: TransactionStatus;
-  transactedAt?: Maybe<Scalars["DateTime"]>;
+  transactedAt: Scalars["DateTime"];
   transactionLocality?: Maybe<TransactionLocality>;
   type: TransactionType;
 };
+
+export type TransactionItem = PaymentTransaction | Transaction;
 
 export enum TransactionLocality {
   International = "international",
   Regular = "regular",
 }
-
-export type TransactionNetworkData = {
-  __typename?: "TransactionNetworkData";
-  cardAcceptorIdCode?: Maybe<Scalars["String"]>;
-  cardAcceptorNameLocation?: Maybe<Scalars["String"]>;
-  cardAcceptorTerminalId?: Maybe<Scalars["String"]>;
-  mccCategoryCode?: Maybe<Scalars["String"]>;
-  merchantCategoryCode?: Maybe<Scalars["String"]>;
-  merchantCategoryCodeDescription?: Maybe<Scalars["String"]>;
-  merchantCity?: Maybe<Scalars["String"]>;
-  merchantCountry?: Maybe<Scalars["String"]>;
-  merchantId?: Maybe<Scalars["String"]>;
-  merchantName?: Maybe<Scalars["String"]>;
-  merchantState?: Maybe<Scalars["String"]>;
-  merchantStreetAddress?: Maybe<Scalars["String"]>;
-  merchantZipcode?: Maybe<Scalars["String"]>;
-  processorDeclineCode?: Maybe<Scalars["String"]>;
-  processorDeclineReason?: Maybe<Scalars["String"]>;
-};
-
-export type TransactionNotificationSettings = {
-  __typename?: "TransactionNotificationSettings";
-  purchaseNotification: Scalars["Boolean"];
-};
-
-export type TransactionNotificationSettingsInput = {
-  purchaseNotification: Scalars["Boolean"];
-};
 
 export type TransactionReward = {
   __typename?: "TransactionReward";
@@ -1448,8 +1522,10 @@ export enum TransactionType {
 
 export type Transactions = {
   __typename?: "Transactions";
+  allTransactions: Array<TransactionItem>;
   count: Scalars["Int"];
   hasMore: Scalars["Boolean"];
+  nextPageOffset?: Maybe<Scalars["Int"]>;
   paymentTransactions: Array<PaymentTransaction>;
   transactions: Array<Transaction>;
 };
@@ -1477,7 +1553,7 @@ export type TransactionsSortInput = {
 
 export type UpdateCardholderAddressInput = {
   addressLine1: Scalars["String"];
-  addressLine2: Scalars["String"];
+  addressLine2?: InputMaybe<Scalars["String"]>;
   city: Scalars["String"];
   state: Scalars["String"];
   type: AddressType;
@@ -1544,25 +1620,111 @@ export type SubmitFeedbackMutation = {
     | { __typename?: "ValidationError"; code: string; message: string };
 };
 
-export type GetAccountOpenDateQueryVariables = Exact<{ [key: string]: never }>;
+export type SubmitUpdateFreezeStatusMutationVariables = Exact<{
+  shouldFreeze: Scalars["Boolean"];
+}>;
 
-export type GetAccountOpenDateQuery = {
+export type SubmitUpdateFreezeStatusMutation = {
+  __typename?: "Mutation";
+  updateFreezeStatus:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | { __typename?: "MutationUpdateFreezeStatusSuccess"; data: boolean }
+    | { __typename?: "ValidationError"; code: string; message: string };
+};
+
+export type SubmitReplaceCardMutationVariables = Exact<{
+  newShippingAddress?: InputMaybe<UpdateCardholderAddressInput>;
+  reason: CardReplacementReason;
+}>;
+
+export type SubmitReplaceCardMutation = {
+  __typename?: "Mutation";
+  replaceCard:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | {
+        __typename?: "MutationReplaceCardSuccess";
+        data: { __typename?: "CardReplacement"; note: string };
+      }
+    | { __typename?: "ValidationError"; code: string; message: string };
+};
+
+export type UpdateNotificationSettingsMutationVariables = Exact<{
+  settings: NotificationSettingsInput;
+}>;
+
+export type UpdateNotificationSettingsMutation = {
+  __typename?: "Mutation";
+  updateNotificationSettings:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | {
+        __typename?: "MutationUpdateNotificationSettingsSuccess";
+        data: {
+          __typename?: "NotificationSettings";
+          promotions: boolean;
+          rewards: boolean;
+          transactions: boolean;
+        };
+      }
+    | { __typename?: "ValidationError"; code: string; message: string };
+};
+
+export type UpdateUserAddressMutationVariables = Exact<{
+  address: UpdateCardholderAddressInput;
+}>;
+
+export type UpdateUserAddressMutation = {
+  __typename?: "Mutation";
+  updateUserAddress:
+    | { __typename?: "BaseError" }
+    | { __typename?: "MutationUpdateUserAddressSuccess"; data: boolean }
+    | { __typename?: "ValidationError" };
+};
+
+export type GetEmploymentStartDateQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetEmploymentStartDateQuery = {
   __typename?: "Query";
-  cardholder?: { __typename?: "Cardholder"; employmentStartDate?: any | null } | null;
+  cardholder?:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryCardholderSuccess";
+        data: { __typename?: "Cardholder"; employmentStartDate?: any | null };
+      }
+    | { __typename?: "ValidationError" }
+    | null;
 };
 
 export type GetAccountDetailsForHomeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAccountDetailsForHomeQuery = {
   __typename?: "Query";
-  account: {
-    __typename?: "Account";
-    creditLimit: number;
-    currentBalance: number;
-    dueDateUtc: any;
-  };
-  cardholder?: { __typename?: "Cardholder"; firstName: string; lastName: string } | null;
-  achPaymentMethods: Array<{ __typename?: "PaymentMethod"; id: string }>;
+  account:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryAccountSuccess";
+        data: {
+          __typename?: "Account";
+          creditLimit: number;
+          currentBalance: number;
+          dueDateUtc: any;
+        };
+      }
+    | { __typename?: "ValidationError" };
+  cardholder?:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryCardholderSuccess";
+        data: { __typename?: "Cardholder"; firstName: string; lastName: string };
+      }
+    | { __typename?: "ValidationError" }
+    | null;
+  paymentMethods:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryPaymentMethodsSuccess";
+        data: Array<{ __typename?: "PaymentMethod"; id: string }>;
+      }
+    | { __typename?: "ValidationError" };
   cardArt:
     | { __typename?: "BaseError" }
     | {
@@ -1572,11 +1734,58 @@ export type GetAccountDetailsForHomeQuery = {
     | { __typename?: "ValidationError" };
 };
 
+export type GetPrimaryCardDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPrimaryCardDataQuery = {
+  __typename?: "Query";
+  primaryCard?:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryPrimaryCardSuccess";
+        data: {
+          __typename?: "Card";
+          cardNumber: string;
+          cvv: string;
+          expirationDate: string;
+          status: CardStatus;
+          id: string;
+          last4Digits: string;
+        };
+      }
+    | { __typename?: "ValidationError" }
+    | null;
+};
+
+export type GetPrimaryCardIdQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPrimaryCardIdQuery = {
+  __typename?: "Query";
+  primaryCard?:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | {
+        __typename?: "QueryPrimaryCardSuccess";
+        data: { __typename?: "Card"; id: string };
+      }
+    | { __typename?: "ValidationError"; code: string; message: string }
+    | null;
+};
+
 export type GetAccountBalanceQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAccountBalanceQuery = {
   __typename?: "Query";
-  account: { __typename?: "Account"; currentBalance: number };
+  account:
+    | { __typename?: "BaseError" }
+    | {
+        __typename?: "QueryAccountSuccess";
+        data: {
+          __typename?: "Account";
+          creditLimit: number;
+          currentBalance: number;
+          dueDateUtc: any;
+        };
+      }
+    | { __typename?: "ValidationError" };
 };
 
 export type GetOffersForMembershipQueryVariables = Exact<{
@@ -1594,7 +1803,6 @@ export type GetOffersForMembershipQuery = {
           title: string;
           details: string;
           longDetails?: string | null;
-          identifier: string;
           hypercardMerchant?: {
             __typename?: "HypercardMerchant";
             logoImageUrl: string;
@@ -1618,151 +1826,110 @@ export type GetRestaurantsQuery = {
           __typename?: "Offer";
           title: string;
           details: string;
-          identifier: string;
           restaurantOffer?: {
             __typename?: "RestaurantOffer";
             primaryImageUrl: string;
             secondaryImageUrl: string;
             location: string;
+            city: RestaurantCity;
           } | null;
         }>;
       }
     | { __typename?: "ValidationError" };
 };
 
-export type CreateAchPaymentMethodMutationVariables = Exact<{
-  paymentMethodInput: CreateAchPaymentMethodInput;
-}>;
+export type GetCardholderAddressQueryVariables = Exact<{ [key: string]: never }>;
 
-export type CreateAchPaymentMethodMutation = {
-  __typename?: "Mutation";
-  createACHPaymentMethod:
+export type GetCardholderAddressQuery = {
+  __typename?: "Query";
+  cardholder?:
     | { __typename?: "BaseError"; code: string; message: string }
     | {
-        __typename?: "MutationCreateACHPaymentMethodSuccess";
-        data: { __typename?: "PaymentMethod"; id: string };
-      }
-    | {
-        __typename?: "ValidationError";
-        code: string;
-        message: string;
-        fieldErrors?: Array<{
-          __typename?: "ZodFieldError";
-          message: string;
-          path: Array<string>;
-        }> | null;
-      };
-};
-
-export type CreateInstantPaymentMutationVariables = Exact<{
-  paymentMethodInput: CreateInstantPaymentInput;
-}>;
-
-export type CreateInstantPaymentMutation = {
-  __typename?: "Mutation";
-  createInstantPaymentSchedule:
-    | { __typename?: "BaseError"; code: string; message: string }
-    | {
-        __typename?: "MutationCreateInstantPaymentScheduleSuccess";
+        __typename?: "QueryCardholderSuccess";
         data: {
-          __typename?: "PaymentSchedule";
-          amount?: string | null;
-          paymentDate?: any | null;
-          methodId: string;
-          id: string;
+          __typename?: "Cardholder";
+          residentialAddress: {
+            __typename?: "CardholderAddress";
+            addressLine1: string;
+            addressLine2?: string | null;
+            city: string;
+            state: string;
+            type: AddressType;
+            zip: string;
+          };
+          shippingAddress: {
+            __typename?: "CardholderAddress";
+            addressLine1: string;
+            addressLine2?: string | null;
+            city: string;
+            state: string;
+            type: AddressType;
+            zip: string;
+          };
         };
       }
-    | {
-        __typename?: "ValidationError";
-        code: string;
-        message: string;
-        fieldErrors?: Array<{
-          __typename?: "ZodFieldError";
-          message: string;
-          path: Array<string>;
-        }> | null;
-      };
+    | { __typename?: "ValidationError"; code: string; message: string }
+    | null;
 };
 
-export type CreateDueDatePaymentScheduleMutationVariables = Exact<{
-  methodId: Scalars["String"];
-  type: PaymentType;
-}>;
+export type GetFeatureFlagsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type CreateDueDatePaymentScheduleMutation = {
-  __typename?: "Mutation";
-  createDueDatePaymentSchedule:
-    | { __typename?: "BaseError" }
+export type GetFeatureFlagsQuery = {
+  __typename?: "Query";
+  featureFlags:
+    | { __typename?: "BaseError"; code: string; message: string }
     | {
-        __typename?: "MutationCreateDueDatePaymentScheduleSuccess";
-        data: { __typename?: "PaymentSchedule"; methodId: string };
+        __typename?: "QueryFeatureFlagsSuccess";
+        data: { __typename?: "FeatureFlags"; expenseManagementShown: boolean };
       }
-    | { __typename?: "ValidationError" };
+    | { __typename?: "ValidationError"; code: string; message: string };
 };
 
-export type DeletePaymentScheduleMutationVariables = Exact<{
-  scheduleId: Scalars["String"];
-}>;
+export type GetNotificationSettingsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type DeletePaymentScheduleMutation = {
-  __typename?: "Mutation";
-  deletePaymentSchedule:
-    | { __typename?: "BaseError" }
-    | { __typename?: "MutationDeletePaymentScheduleSuccess"; data: boolean }
-    | { __typename?: "ValidationError" };
-};
-
-export type GetCurrentStatementPaymentOptionsQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetCurrentStatementPaymentOptionsQuery = {
+export type GetNotificationSettingsQuery = {
   __typename?: "Query";
-  account: {
-    __typename?: "Account";
-    currentBalance: number;
-    dueAmount: number;
-    minimumPayment: number;
-  };
+  notificationSettings:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | {
+        __typename?: "QueryNotificationSettingsSuccess";
+        data: {
+          __typename?: "NotificationSettings";
+          promotions: boolean;
+          rewards: boolean;
+          transactions: boolean;
+        };
+      }
+    | { __typename?: "ValidationError"; code: string; message: string };
 };
 
-export type GetAchPaymentMethodsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetUserIdQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetAchPaymentMethodsQuery = {
+export type GetUserIdQuery = {
   __typename?: "Query";
-  achPaymentMethods: Array<{
-    __typename?: "PaymentMethod";
-    id: string;
-    accountLast4Digits: string;
-    accountType: BankAccountType;
-    bankName: string;
-    status: PaymentMethodStatus;
-  }>;
-};
-
-export type GetPaymentSchedulesQueryVariables = Exact<{
-  status?: InputMaybe<PaymentScheduleStatus>;
-  frequency?: InputMaybe<PaymentScheduleFrequency>;
-}>;
-
-export type GetPaymentSchedulesQuery = {
-  __typename?: "Query";
-  paymentSchedules:
+  cardholder?:
     | { __typename?: "BaseError" }
     | {
-        __typename?: "QueryPaymentSchedulesSuccess";
-        data: Array<{
-          __typename?: "PaymentSchedule";
-          amount?: string | null;
-          status: PaymentScheduleStatus;
-          paymentDate?: any | null;
-          type: PaymentType;
-          methodId: string;
-          frequency: PaymentScheduleFrequency;
-          id: string;
-        }>;
+        __typename?: "QueryCardholderSuccess";
+        data: { __typename?: "Cardholder"; userId: string };
       }
-    | { __typename?: "ValidationError" };
+    | { __typename?: "ValidationError" }
+    | null;
+};
+
+export type CreateDisputeMutationVariables = Exact<{
+  input: CreateDisputeInput;
+}>;
+
+export type CreateDisputeMutation = {
+  __typename?: "Mutation";
+  createDispute:
+    | { __typename?: "BaseError"; code: string; message: string }
+    | {
+        __typename?: "MutationCreateDisputeSuccess";
+        data: { __typename?: "Dispute"; id: string };
+      }
+    | { __typename?: "ValidationError"; code: string; message: string };
 };
 
 export type GetTransactionsQueryVariables = Exact<{
@@ -1783,18 +1950,31 @@ export type GetTransactionsQuery = {
         data: {
           __typename?: "Transactions";
           hasMore: boolean;
-          transactions: Array<{
-            __typename?: "Transaction";
-            transactedAt?: any | null;
-            amountInDollars: number;
-            id: number;
-            status: TransactionStatus;
-            hypercardCategoryIconUrl: string;
-            externalMerchant?: {
-              __typename?: "ExternalMerchant";
-              displayName: string;
-            } | null;
-          }>;
+          nextPageOffset?: number | null;
+          allTransactions: Array<
+            | {
+                __typename?: "PaymentTransaction";
+                amountInDollars: number;
+                type: PaymentTransactionType;
+                transactedAt: any;
+                displayTitle: string;
+                id: number;
+                paymentStatus: PaymentTransactionStatus;
+              }
+            | {
+                __typename?: "Transaction";
+                transactedAt: any;
+                creditIndicator: CreditIndicator;
+                amountInDollars: number;
+                id: number;
+                hypercardCategoryIconUrl: string;
+                transactionStatus: TransactionStatus;
+                externalMerchant?: {
+                  __typename?: "ExternalMerchant";
+                  displayName: string;
+                } | null;
+              }
+          >;
         };
       }
     | { __typename?: "ValidationError" };
@@ -1812,12 +1992,14 @@ export type GetTransactionByIdQuery = {
         __typename?: "QueryTransactionSuccess";
         data: {
           __typename?: "Transaction";
+          creditIndicator: CreditIndicator;
           amountInDollars: number;
           cardLast4Digits?: string | null;
-          transactedAt?: any | null;
+          transactedAt: any;
           status: TransactionStatus;
           settledAt?: any | null;
           type: TransactionType;
+          dispute?: { __typename?: "Dispute"; status: DisputeStatus } | null;
           externalMerchant?: {
             __typename?: "ExternalMerchant";
             displayName: string;
@@ -1947,76 +2129,334 @@ export type SubmitFeedbackMutationOptions = Apollo.BaseMutationOptions<
   SubmitFeedbackMutation,
   SubmitFeedbackMutationVariables
 >;
-export const GetAccountOpenDateDocument = gql`
-  query GetAccountOpenDate {
+export const SubmitUpdateFreezeStatusDocument = gql`
+  mutation SubmitUpdateFreezeStatus($shouldFreeze: Boolean!) {
+    updateFreezeStatus(shouldFreeze: $shouldFreeze) {
+      ... on MutationUpdateFreezeStatusSuccess {
+        data
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+export type SubmitUpdateFreezeStatusMutationFn = Apollo.MutationFunction<
+  SubmitUpdateFreezeStatusMutation,
+  SubmitUpdateFreezeStatusMutationVariables
+>;
+
+/**
+ * __useSubmitUpdateFreezeStatusMutation__
+ *
+ * To run a mutation, you first call `useSubmitUpdateFreezeStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitUpdateFreezeStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitUpdateFreezeStatusMutation, { data, loading, error }] = useSubmitUpdateFreezeStatusMutation({
+ *   variables: {
+ *      shouldFreeze: // value for 'shouldFreeze'
+ *   },
+ * });
+ */
+export function useSubmitUpdateFreezeStatusMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SubmitUpdateFreezeStatusMutation,
+    SubmitUpdateFreezeStatusMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    SubmitUpdateFreezeStatusMutation,
+    SubmitUpdateFreezeStatusMutationVariables
+  >(SubmitUpdateFreezeStatusDocument, options);
+}
+export type SubmitUpdateFreezeStatusMutationHookResult = ReturnType<
+  typeof useSubmitUpdateFreezeStatusMutation
+>;
+export type SubmitUpdateFreezeStatusMutationResult =
+  Apollo.MutationResult<SubmitUpdateFreezeStatusMutation>;
+export type SubmitUpdateFreezeStatusMutationOptions = Apollo.BaseMutationOptions<
+  SubmitUpdateFreezeStatusMutation,
+  SubmitUpdateFreezeStatusMutationVariables
+>;
+export const SubmitReplaceCardDocument = gql`
+  mutation SubmitReplaceCard(
+    $newShippingAddress: UpdateCardholderAddressInput
+    $reason: CardReplacementReason!
+  ) {
+    replaceCard(newShippingAddress: $newShippingAddress, reason: $reason) {
+      ... on MutationReplaceCardSuccess {
+        data {
+          note
+        }
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+export type SubmitReplaceCardMutationFn = Apollo.MutationFunction<
+  SubmitReplaceCardMutation,
+  SubmitReplaceCardMutationVariables
+>;
+
+/**
+ * __useSubmitReplaceCardMutation__
+ *
+ * To run a mutation, you first call `useSubmitReplaceCardMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitReplaceCardMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitReplaceCardMutation, { data, loading, error }] = useSubmitReplaceCardMutation({
+ *   variables: {
+ *      newShippingAddress: // value for 'newShippingAddress'
+ *      reason: // value for 'reason'
+ *   },
+ * });
+ */
+export function useSubmitReplaceCardMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SubmitReplaceCardMutation,
+    SubmitReplaceCardMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    SubmitReplaceCardMutation,
+    SubmitReplaceCardMutationVariables
+  >(SubmitReplaceCardDocument, options);
+}
+export type SubmitReplaceCardMutationHookResult = ReturnType<
+  typeof useSubmitReplaceCardMutation
+>;
+export type SubmitReplaceCardMutationResult =
+  Apollo.MutationResult<SubmitReplaceCardMutation>;
+export type SubmitReplaceCardMutationOptions = Apollo.BaseMutationOptions<
+  SubmitReplaceCardMutation,
+  SubmitReplaceCardMutationVariables
+>;
+export const UpdateNotificationSettingsDocument = gql`
+  mutation UpdateNotificationSettings($settings: NotificationSettingsInput!) {
+    updateNotificationSettings(settings: $settings) {
+      ... on MutationUpdateNotificationSettingsSuccess {
+        data {
+          promotions
+          rewards
+          transactions
+        }
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+export type UpdateNotificationSettingsMutationFn = Apollo.MutationFunction<
+  UpdateNotificationSettingsMutation,
+  UpdateNotificationSettingsMutationVariables
+>;
+
+/**
+ * __useUpdateNotificationSettingsMutation__
+ *
+ * To run a mutation, you first call `useUpdateNotificationSettingsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateNotificationSettingsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateNotificationSettingsMutation, { data, loading, error }] = useUpdateNotificationSettingsMutation({
+ *   variables: {
+ *      settings: // value for 'settings'
+ *   },
+ * });
+ */
+export function useUpdateNotificationSettingsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateNotificationSettingsMutation,
+    UpdateNotificationSettingsMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateNotificationSettingsMutation,
+    UpdateNotificationSettingsMutationVariables
+  >(UpdateNotificationSettingsDocument, options);
+}
+export type UpdateNotificationSettingsMutationHookResult = ReturnType<
+  typeof useUpdateNotificationSettingsMutation
+>;
+export type UpdateNotificationSettingsMutationResult =
+  Apollo.MutationResult<UpdateNotificationSettingsMutation>;
+export type UpdateNotificationSettingsMutationOptions = Apollo.BaseMutationOptions<
+  UpdateNotificationSettingsMutation,
+  UpdateNotificationSettingsMutationVariables
+>;
+export const UpdateUserAddressDocument = gql`
+  mutation UpdateUserAddress($address: UpdateCardholderAddressInput!) {
+    updateUserAddress(address: $address) {
+      ... on MutationUpdateUserAddressSuccess {
+        data
+      }
+    }
+  }
+`;
+export type UpdateUserAddressMutationFn = Apollo.MutationFunction<
+  UpdateUserAddressMutation,
+  UpdateUserAddressMutationVariables
+>;
+
+/**
+ * __useUpdateUserAddressMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserAddressMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserAddressMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserAddressMutation, { data, loading, error }] = useUpdateUserAddressMutation({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useUpdateUserAddressMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateUserAddressMutation,
+    UpdateUserAddressMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateUserAddressMutation,
+    UpdateUserAddressMutationVariables
+  >(UpdateUserAddressDocument, options);
+}
+export type UpdateUserAddressMutationHookResult = ReturnType<
+  typeof useUpdateUserAddressMutation
+>;
+export type UpdateUserAddressMutationResult =
+  Apollo.MutationResult<UpdateUserAddressMutation>;
+export type UpdateUserAddressMutationOptions = Apollo.BaseMutationOptions<
+  UpdateUserAddressMutation,
+  UpdateUserAddressMutationVariables
+>;
+export const GetEmploymentStartDateDocument = gql`
+  query GetEmploymentStartDate {
     cardholder @persist {
-      employmentStartDate
+      ... on QueryCardholderSuccess {
+        data {
+          employmentStartDate
+        }
+      }
     }
   }
 `;
 
 /**
- * __useGetAccountOpenDateQuery__
+ * __useGetEmploymentStartDateQuery__
  *
- * To run a query within a React component, call `useGetAccountOpenDateQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAccountOpenDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetEmploymentStartDateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEmploymentStartDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetAccountOpenDateQuery({
+ * const { data, loading, error } = useGetEmploymentStartDateQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetAccountOpenDateQuery(
+export function useGetEmploymentStartDateQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    GetAccountOpenDateQuery,
-    GetAccountOpenDateQueryVariables
+    GetEmploymentStartDateQuery,
+    GetEmploymentStartDateQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetAccountOpenDateQuery, GetAccountOpenDateQueryVariables>(
-    GetAccountOpenDateDocument,
-    options,
-  );
+  return Apollo.useQuery<
+    GetEmploymentStartDateQuery,
+    GetEmploymentStartDateQueryVariables
+  >(GetEmploymentStartDateDocument, options);
 }
-export function useGetAccountOpenDateLazyQuery(
+export function useGetEmploymentStartDateLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetAccountOpenDateQuery,
-    GetAccountOpenDateQueryVariables
+    GetEmploymentStartDateQuery,
+    GetEmploymentStartDateQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetAccountOpenDateQuery, GetAccountOpenDateQueryVariables>(
-    GetAccountOpenDateDocument,
-    options,
-  );
+  return Apollo.useLazyQuery<
+    GetEmploymentStartDateQuery,
+    GetEmploymentStartDateQueryVariables
+  >(GetEmploymentStartDateDocument, options);
 }
-export type GetAccountOpenDateQueryHookResult = ReturnType<
-  typeof useGetAccountOpenDateQuery
+export type GetEmploymentStartDateQueryHookResult = ReturnType<
+  typeof useGetEmploymentStartDateQuery
 >;
-export type GetAccountOpenDateLazyQueryHookResult = ReturnType<
-  typeof useGetAccountOpenDateLazyQuery
+export type GetEmploymentStartDateLazyQueryHookResult = ReturnType<
+  typeof useGetEmploymentStartDateLazyQuery
 >;
-export type GetAccountOpenDateQueryResult = Apollo.QueryResult<
-  GetAccountOpenDateQuery,
-  GetAccountOpenDateQueryVariables
+export type GetEmploymentStartDateQueryResult = Apollo.QueryResult<
+  GetEmploymentStartDateQuery,
+  GetEmploymentStartDateQueryVariables
 >;
 export const GetAccountDetailsForHomeDocument = gql`
   query GetAccountDetailsForHome {
     account {
-      creditLimit
-      currentBalance
-      dueDateUtc
+      ... on QueryAccountSuccess {
+        data {
+          creditLimit
+          currentBalance
+          dueDateUtc
+        }
+      }
     }
     cardholder {
-      firstName
-      lastName
+      ... on QueryCardholderSuccess {
+        data {
+          firstName
+          lastName
+        }
+      }
     }
-    achPaymentMethods {
-      id
+    paymentMethods {
+      ... on QueryPaymentMethodsSuccess {
+        data {
+          id
+        }
+      }
     }
     cardArt {
       ... on QueryCardArtSuccess {
@@ -2078,10 +2518,149 @@ export type GetAccountDetailsForHomeQueryResult = Apollo.QueryResult<
   GetAccountDetailsForHomeQuery,
   GetAccountDetailsForHomeQueryVariables
 >;
+export const GetPrimaryCardDataDocument = gql`
+  query GetPrimaryCardData {
+    primaryCard(detokenized: true) @persist {
+      ... on QueryPrimaryCardSuccess {
+        data {
+          cardNumber
+          cvv
+          expirationDate
+          status
+          id
+          last4Digits
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetPrimaryCardDataQuery__
+ *
+ * To run a query within a React component, call `useGetPrimaryCardDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPrimaryCardDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPrimaryCardDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPrimaryCardDataQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetPrimaryCardDataQuery,
+    GetPrimaryCardDataQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPrimaryCardDataQuery, GetPrimaryCardDataQueryVariables>(
+    GetPrimaryCardDataDocument,
+    options,
+  );
+}
+export function useGetPrimaryCardDataLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPrimaryCardDataQuery,
+    GetPrimaryCardDataQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPrimaryCardDataQuery, GetPrimaryCardDataQueryVariables>(
+    GetPrimaryCardDataDocument,
+    options,
+  );
+}
+export type GetPrimaryCardDataQueryHookResult = ReturnType<
+  typeof useGetPrimaryCardDataQuery
+>;
+export type GetPrimaryCardDataLazyQueryHookResult = ReturnType<
+  typeof useGetPrimaryCardDataLazyQuery
+>;
+export type GetPrimaryCardDataQueryResult = Apollo.QueryResult<
+  GetPrimaryCardDataQuery,
+  GetPrimaryCardDataQueryVariables
+>;
+export const GetPrimaryCardIdDocument = gql`
+  query GetPrimaryCardId {
+    primaryCard(detokenized: false) {
+      ... on QueryPrimaryCardSuccess {
+        data {
+          id
+        }
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetPrimaryCardIdQuery__
+ *
+ * To run a query within a React component, call `useGetPrimaryCardIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPrimaryCardIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPrimaryCardIdQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPrimaryCardIdQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetPrimaryCardIdQuery,
+    GetPrimaryCardIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPrimaryCardIdQuery, GetPrimaryCardIdQueryVariables>(
+    GetPrimaryCardIdDocument,
+    options,
+  );
+}
+export function useGetPrimaryCardIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPrimaryCardIdQuery,
+    GetPrimaryCardIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPrimaryCardIdQuery, GetPrimaryCardIdQueryVariables>(
+    GetPrimaryCardIdDocument,
+    options,
+  );
+}
+export type GetPrimaryCardIdQueryHookResult = ReturnType<typeof useGetPrimaryCardIdQuery>;
+export type GetPrimaryCardIdLazyQueryHookResult = ReturnType<
+  typeof useGetPrimaryCardIdLazyQuery
+>;
+export type GetPrimaryCardIdQueryResult = Apollo.QueryResult<
+  GetPrimaryCardIdQuery,
+  GetPrimaryCardIdQueryVariables
+>;
 export const GetAccountBalanceDocument = gql`
   query GetAccountBalance {
     account {
-      currentBalance
+      ... on QueryAccountSuccess {
+        data {
+          creditLimit
+          currentBalance
+          dueDateUtc
+        }
+      }
     }
   }
 `;
@@ -2143,7 +2722,6 @@ export const GetOffersForMembershipDocument = gql`
           title
           details
           longDetails
-          identifier
           hypercardMerchant {
             logoImageUrl
           }
@@ -2210,11 +2788,11 @@ export const GetRestaurantsDocument = gql`
         data {
           title
           details
-          identifier
           restaurantOffer {
             primaryImageUrl
             secondaryImageUrl
             location
+            city
           }
         }
       }
@@ -2270,391 +2848,234 @@ export type GetRestaurantsQueryResult = Apollo.QueryResult<
   GetRestaurantsQuery,
   GetRestaurantsQueryVariables
 >;
-export const CreateAchPaymentMethodDocument = gql`
-  mutation CreateACHPaymentMethod($paymentMethodInput: CreateACHPaymentMethodInput!) {
-    createACHPaymentMethod(paymentMethodInput: $paymentMethodInput) {
-      ... on MutationCreateACHPaymentMethodSuccess {
+export const GetCardholderAddressDocument = gql`
+  query GetCardholderAddress {
+    cardholder {
+      ... on QueryCardholderSuccess {
         data {
-          id
+          residentialAddress {
+            addressLine1
+            addressLine2
+            city
+            state
+            type
+            zip
+          }
+          shippingAddress {
+            addressLine1
+            addressLine2
+            city
+            state
+            type
+            zip
+          }
         }
-      }
-      ... on ValidationError {
-        code
-        fieldErrors {
-          message
-          path
-        }
-        message
       }
       ... on BaseError {
         code
         message
       }
-      ... on Error {
-        code
-        message
-      }
-    }
-  }
-`;
-export type CreateAchPaymentMethodMutationFn = Apollo.MutationFunction<
-  CreateAchPaymentMethodMutation,
-  CreateAchPaymentMethodMutationVariables
->;
-
-/**
- * __useCreateAchPaymentMethodMutation__
- *
- * To run a mutation, you first call `useCreateAchPaymentMethodMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateAchPaymentMethodMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createAchPaymentMethodMutation, { data, loading, error }] = useCreateAchPaymentMethodMutation({
- *   variables: {
- *      paymentMethodInput: // value for 'paymentMethodInput'
- *   },
- * });
- */
-export function useCreateAchPaymentMethodMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateAchPaymentMethodMutation,
-    CreateAchPaymentMethodMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    CreateAchPaymentMethodMutation,
-    CreateAchPaymentMethodMutationVariables
-  >(CreateAchPaymentMethodDocument, options);
-}
-export type CreateAchPaymentMethodMutationHookResult = ReturnType<
-  typeof useCreateAchPaymentMethodMutation
->;
-export type CreateAchPaymentMethodMutationResult =
-  Apollo.MutationResult<CreateAchPaymentMethodMutation>;
-export type CreateAchPaymentMethodMutationOptions = Apollo.BaseMutationOptions<
-  CreateAchPaymentMethodMutation,
-  CreateAchPaymentMethodMutationVariables
->;
-export const CreateInstantPaymentDocument = gql`
-  mutation CreateInstantPayment($paymentMethodInput: CreateInstantPaymentInput!) {
-    createInstantPaymentSchedule(input: $paymentMethodInput) {
-      ... on MutationCreateInstantPaymentScheduleSuccess {
-        data {
-          amount
-          paymentDate
-          methodId
-          id
-        }
-      }
       ... on ValidationError {
         code
-        fieldErrors {
-          message
-          path
-        }
-        message
-      }
-      ... on BaseError {
-        code
-        message
-      }
-      ... on Error {
-        code
         message
       }
     }
   }
 `;
-export type CreateInstantPaymentMutationFn = Apollo.MutationFunction<
-  CreateInstantPaymentMutation,
-  CreateInstantPaymentMutationVariables
->;
 
 /**
- * __useCreateInstantPaymentMutation__
+ * __useGetCardholderAddressQuery__
  *
- * To run a mutation, you first call `useCreateInstantPaymentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateInstantPaymentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createInstantPaymentMutation, { data, loading, error }] = useCreateInstantPaymentMutation({
- *   variables: {
- *      paymentMethodInput: // value for 'paymentMethodInput'
- *   },
- * });
- */
-export function useCreateInstantPaymentMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateInstantPaymentMutation,
-    CreateInstantPaymentMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    CreateInstantPaymentMutation,
-    CreateInstantPaymentMutationVariables
-  >(CreateInstantPaymentDocument, options);
-}
-export type CreateInstantPaymentMutationHookResult = ReturnType<
-  typeof useCreateInstantPaymentMutation
->;
-export type CreateInstantPaymentMutationResult =
-  Apollo.MutationResult<CreateInstantPaymentMutation>;
-export type CreateInstantPaymentMutationOptions = Apollo.BaseMutationOptions<
-  CreateInstantPaymentMutation,
-  CreateInstantPaymentMutationVariables
->;
-export const CreateDueDatePaymentScheduleDocument = gql`
-  mutation CreateDueDatePaymentSchedule($methodId: String!, $type: PaymentType!) {
-    createDueDatePaymentSchedule(input: { methodId: $methodId, type: $type }) {
-      ... on MutationCreateDueDatePaymentScheduleSuccess {
-        data {
-          methodId
-        }
-      }
-    }
-  }
-`;
-export type CreateDueDatePaymentScheduleMutationFn = Apollo.MutationFunction<
-  CreateDueDatePaymentScheduleMutation,
-  CreateDueDatePaymentScheduleMutationVariables
->;
-
-/**
- * __useCreateDueDatePaymentScheduleMutation__
- *
- * To run a mutation, you first call `useCreateDueDatePaymentScheduleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateDueDatePaymentScheduleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createDueDatePaymentScheduleMutation, { data, loading, error }] = useCreateDueDatePaymentScheduleMutation({
- *   variables: {
- *      methodId: // value for 'methodId'
- *      type: // value for 'type'
- *   },
- * });
- */
-export function useCreateDueDatePaymentScheduleMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateDueDatePaymentScheduleMutation,
-    CreateDueDatePaymentScheduleMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    CreateDueDatePaymentScheduleMutation,
-    CreateDueDatePaymentScheduleMutationVariables
-  >(CreateDueDatePaymentScheduleDocument, options);
-}
-export type CreateDueDatePaymentScheduleMutationHookResult = ReturnType<
-  typeof useCreateDueDatePaymentScheduleMutation
->;
-export type CreateDueDatePaymentScheduleMutationResult =
-  Apollo.MutationResult<CreateDueDatePaymentScheduleMutation>;
-export type CreateDueDatePaymentScheduleMutationOptions = Apollo.BaseMutationOptions<
-  CreateDueDatePaymentScheduleMutation,
-  CreateDueDatePaymentScheduleMutationVariables
->;
-export const DeletePaymentScheduleDocument = gql`
-  mutation DeletePaymentSchedule($scheduleId: String!) {
-    deletePaymentSchedule(scheduleId: $scheduleId) {
-      ... on MutationDeletePaymentScheduleSuccess {
-        data
-      }
-    }
-  }
-`;
-export type DeletePaymentScheduleMutationFn = Apollo.MutationFunction<
-  DeletePaymentScheduleMutation,
-  DeletePaymentScheduleMutationVariables
->;
-
-/**
- * __useDeletePaymentScheduleMutation__
- *
- * To run a mutation, you first call `useDeletePaymentScheduleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeletePaymentScheduleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deletePaymentScheduleMutation, { data, loading, error }] = useDeletePaymentScheduleMutation({
- *   variables: {
- *      scheduleId: // value for 'scheduleId'
- *   },
- * });
- */
-export function useDeletePaymentScheduleMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    DeletePaymentScheduleMutation,
-    DeletePaymentScheduleMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    DeletePaymentScheduleMutation,
-    DeletePaymentScheduleMutationVariables
-  >(DeletePaymentScheduleDocument, options);
-}
-export type DeletePaymentScheduleMutationHookResult = ReturnType<
-  typeof useDeletePaymentScheduleMutation
->;
-export type DeletePaymentScheduleMutationResult =
-  Apollo.MutationResult<DeletePaymentScheduleMutation>;
-export type DeletePaymentScheduleMutationOptions = Apollo.BaseMutationOptions<
-  DeletePaymentScheduleMutation,
-  DeletePaymentScheduleMutationVariables
->;
-export const GetCurrentStatementPaymentOptionsDocument = gql`
-  query GetCurrentStatementPaymentOptions {
-    account {
-      currentBalance
-      dueAmount
-      minimumPayment
-    }
-  }
-`;
-
-/**
- * __useGetCurrentStatementPaymentOptionsQuery__
- *
- * To run a query within a React component, call `useGetCurrentStatementPaymentOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCurrentStatementPaymentOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetCardholderAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCardholderAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCurrentStatementPaymentOptionsQuery({
+ * const { data, loading, error } = useGetCardholderAddressQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetCurrentStatementPaymentOptionsQuery(
+export function useGetCardholderAddressQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    GetCurrentStatementPaymentOptionsQuery,
-    GetCurrentStatementPaymentOptionsQueryVariables
+    GetCardholderAddressQuery,
+    GetCardholderAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetCardholderAddressQuery, GetCardholderAddressQueryVariables>(
+    GetCardholderAddressDocument,
+    options,
+  );
+}
+export function useGetCardholderAddressLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCardholderAddressQuery,
+    GetCardholderAddressQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetCardholderAddressQuery,
+    GetCardholderAddressQueryVariables
+  >(GetCardholderAddressDocument, options);
+}
+export type GetCardholderAddressQueryHookResult = ReturnType<
+  typeof useGetCardholderAddressQuery
+>;
+export type GetCardholderAddressLazyQueryHookResult = ReturnType<
+  typeof useGetCardholderAddressLazyQuery
+>;
+export type GetCardholderAddressQueryResult = Apollo.QueryResult<
+  GetCardholderAddressQuery,
+  GetCardholderAddressQueryVariables
+>;
+export const GetFeatureFlagsDocument = gql`
+  query GetFeatureFlags {
+    featureFlags {
+      ... on QueryFeatureFlagsSuccess {
+        data {
+          expenseManagementShown
+        }
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetFeatureFlagsQuery__
+ *
+ * To run a query within a React component, call `useGetFeatureFlagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFeatureFlagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFeatureFlagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetFeatureFlagsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetFeatureFlagsQuery,
+    GetFeatureFlagsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetFeatureFlagsQuery, GetFeatureFlagsQueryVariables>(
+    GetFeatureFlagsDocument,
+    options,
+  );
+}
+export function useGetFeatureFlagsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetFeatureFlagsQuery,
+    GetFeatureFlagsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetFeatureFlagsQuery, GetFeatureFlagsQueryVariables>(
+    GetFeatureFlagsDocument,
+    options,
+  );
+}
+export type GetFeatureFlagsQueryHookResult = ReturnType<typeof useGetFeatureFlagsQuery>;
+export type GetFeatureFlagsLazyQueryHookResult = ReturnType<
+  typeof useGetFeatureFlagsLazyQuery
+>;
+export type GetFeatureFlagsQueryResult = Apollo.QueryResult<
+  GetFeatureFlagsQuery,
+  GetFeatureFlagsQueryVariables
+>;
+export const GetNotificationSettingsDocument = gql`
+  query GetNotificationSettings {
+    notificationSettings {
+      ... on QueryNotificationSettingsSuccess {
+        data {
+          promotions
+          rewards
+          transactions
+        }
+      }
+      ... on BaseError {
+        code
+        message
+      }
+      ... on ValidationError {
+        code
+        message
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetNotificationSettingsQuery__
+ *
+ * To run a query within a React component, call `useGetNotificationSettingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNotificationSettingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNotificationSettingsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetNotificationSettingsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetNotificationSettingsQuery,
+    GetNotificationSettingsQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
-    GetCurrentStatementPaymentOptionsQuery,
-    GetCurrentStatementPaymentOptionsQueryVariables
-  >(GetCurrentStatementPaymentOptionsDocument, options);
+    GetNotificationSettingsQuery,
+    GetNotificationSettingsQueryVariables
+  >(GetNotificationSettingsDocument, options);
 }
-export function useGetCurrentStatementPaymentOptionsLazyQuery(
+export function useGetNotificationSettingsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetCurrentStatementPaymentOptionsQuery,
-    GetCurrentStatementPaymentOptionsQueryVariables
+    GetNotificationSettingsQuery,
+    GetNotificationSettingsQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
-    GetCurrentStatementPaymentOptionsQuery,
-    GetCurrentStatementPaymentOptionsQueryVariables
-  >(GetCurrentStatementPaymentOptionsDocument, options);
+    GetNotificationSettingsQuery,
+    GetNotificationSettingsQueryVariables
+  >(GetNotificationSettingsDocument, options);
 }
-export type GetCurrentStatementPaymentOptionsQueryHookResult = ReturnType<
-  typeof useGetCurrentStatementPaymentOptionsQuery
+export type GetNotificationSettingsQueryHookResult = ReturnType<
+  typeof useGetNotificationSettingsQuery
 >;
-export type GetCurrentStatementPaymentOptionsLazyQueryHookResult = ReturnType<
-  typeof useGetCurrentStatementPaymentOptionsLazyQuery
+export type GetNotificationSettingsLazyQueryHookResult = ReturnType<
+  typeof useGetNotificationSettingsLazyQuery
 >;
-export type GetCurrentStatementPaymentOptionsQueryResult = Apollo.QueryResult<
-  GetCurrentStatementPaymentOptionsQuery,
-  GetCurrentStatementPaymentOptionsQueryVariables
+export type GetNotificationSettingsQueryResult = Apollo.QueryResult<
+  GetNotificationSettingsQuery,
+  GetNotificationSettingsQueryVariables
 >;
-export const GetAchPaymentMethodsDocument = gql`
-  query GetACHPaymentMethods {
-    achPaymentMethods {
-      id
-      accountLast4Digits
-      accountType
-      bankName
-      status
-    }
-  }
-`;
-
-/**
- * __useGetAchPaymentMethodsQuery__
- *
- * To run a query within a React component, call `useGetAchPaymentMethodsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAchPaymentMethodsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetAchPaymentMethodsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetAchPaymentMethodsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetAchPaymentMethodsQuery,
-    GetAchPaymentMethodsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetAchPaymentMethodsQuery, GetAchPaymentMethodsQueryVariables>(
-    GetAchPaymentMethodsDocument,
-    options,
-  );
-}
-export function useGetAchPaymentMethodsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetAchPaymentMethodsQuery,
-    GetAchPaymentMethodsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    GetAchPaymentMethodsQuery,
-    GetAchPaymentMethodsQueryVariables
-  >(GetAchPaymentMethodsDocument, options);
-}
-export type GetAchPaymentMethodsQueryHookResult = ReturnType<
-  typeof useGetAchPaymentMethodsQuery
->;
-export type GetAchPaymentMethodsLazyQueryHookResult = ReturnType<
-  typeof useGetAchPaymentMethodsLazyQuery
->;
-export type GetAchPaymentMethodsQueryResult = Apollo.QueryResult<
-  GetAchPaymentMethodsQuery,
-  GetAchPaymentMethodsQueryVariables
->;
-export const GetPaymentSchedulesDocument = gql`
-  query GetPaymentSchedules(
-    $status: PaymentScheduleStatus
-    $frequency: PaymentScheduleFrequency
-  ) {
-    paymentSchedules(status: $status, frequency: $frequency) {
-      ... on QueryPaymentSchedulesSuccess {
+export const GetUserIdDocument = gql`
+  query GetUserId {
+    cardholder {
+      ... on QueryCardholderSuccess {
         data {
-          amount
-          status
-          paymentDate
-          type
-          methodId
-          frequency
-          id
+          userId
         }
       }
     }
@@ -2662,55 +3083,98 @@ export const GetPaymentSchedulesDocument = gql`
 `;
 
 /**
- * __useGetPaymentSchedulesQuery__
+ * __useGetUserIdQuery__
  *
- * To run a query within a React component, call `useGetPaymentSchedulesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPaymentSchedulesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPaymentSchedulesQuery({
+ * const { data, loading, error } = useGetUserIdQuery({
  *   variables: {
- *      status: // value for 'status'
- *      frequency: // value for 'frequency'
  *   },
  * });
  */
-export function useGetPaymentSchedulesQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetPaymentSchedulesQuery,
-    GetPaymentSchedulesQueryVariables
-  >,
+export function useGetUserIdQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetUserIdQuery, GetUserIdQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetPaymentSchedulesQuery, GetPaymentSchedulesQueryVariables>(
-    GetPaymentSchedulesDocument,
+  return Apollo.useQuery<GetUserIdQuery, GetUserIdQueryVariables>(
+    GetUserIdDocument,
     options,
   );
 }
-export function useGetPaymentSchedulesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetPaymentSchedulesQuery,
-    GetPaymentSchedulesQueryVariables
-  >,
+export function useGetUserIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserIdQuery, GetUserIdQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetPaymentSchedulesQuery, GetPaymentSchedulesQueryVariables>(
-    GetPaymentSchedulesDocument,
+  return Apollo.useLazyQuery<GetUserIdQuery, GetUserIdQueryVariables>(
+    GetUserIdDocument,
     options,
   );
 }
-export type GetPaymentSchedulesQueryHookResult = ReturnType<
-  typeof useGetPaymentSchedulesQuery
+export type GetUserIdQueryHookResult = ReturnType<typeof useGetUserIdQuery>;
+export type GetUserIdLazyQueryHookResult = ReturnType<typeof useGetUserIdLazyQuery>;
+export type GetUserIdQueryResult = Apollo.QueryResult<
+  GetUserIdQuery,
+  GetUserIdQueryVariables
 >;
-export type GetPaymentSchedulesLazyQueryHookResult = ReturnType<
-  typeof useGetPaymentSchedulesLazyQuery
+export const CreateDisputeDocument = gql`
+  mutation CreateDispute($input: CreateDisputeInput!) {
+    createDispute(input: $input) {
+      ... on MutationCreateDisputeSuccess {
+        data {
+          id
+        }
+      }
+      ... on Error {
+        code
+        message
+      }
+    }
+  }
+`;
+export type CreateDisputeMutationFn = Apollo.MutationFunction<
+  CreateDisputeMutation,
+  CreateDisputeMutationVariables
 >;
-export type GetPaymentSchedulesQueryResult = Apollo.QueryResult<
-  GetPaymentSchedulesQuery,
-  GetPaymentSchedulesQueryVariables
+
+/**
+ * __useCreateDisputeMutation__
+ *
+ * To run a mutation, you first call `useCreateDisputeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDisputeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDisputeMutation, { data, loading, error }] = useCreateDisputeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateDisputeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateDisputeMutation,
+    CreateDisputeMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateDisputeMutation, CreateDisputeMutationVariables>(
+    CreateDisputeDocument,
+    options,
+  );
+}
+export type CreateDisputeMutationHookResult = ReturnType<typeof useCreateDisputeMutation>;
+export type CreateDisputeMutationResult = Apollo.MutationResult<CreateDisputeMutation>;
+export type CreateDisputeMutationOptions = Apollo.BaseMutationOptions<
+  CreateDisputeMutation,
+  CreateDisputeMutationVariables
 >;
 export const GetTransactionsDocument = gql`
   query GetTransactions(
@@ -2723,7 +3187,7 @@ export const GetTransactionsDocument = gql`
   ) {
     transactions(
       pagination: { offset: $offset, pageSize: $pageSize }
-      includeMerchants: true
+      includeRewards: true
       filters: {
         merchantName: $merchantName
         type: $filterType
@@ -2735,14 +3199,26 @@ export const GetTransactionsDocument = gql`
         __typename
         data {
           hasMore
-          transactions {
-            transactedAt
-            amountInDollars
-            id
-            status
-            hypercardCategoryIconUrl
-            externalMerchant {
-              displayName
+          nextPageOffset
+          allTransactions {
+            ... on PaymentTransaction {
+              amountInDollars
+              type
+              transactedAt
+              paymentStatus: status
+              displayTitle
+              id
+            }
+            ... on Transaction {
+              transactedAt
+              creditIndicator
+              amountInDollars
+              id
+              transactionStatus: status
+              hypercardCategoryIconUrl
+              externalMerchant {
+                displayName
+              }
             }
           }
         }
@@ -2806,13 +3282,13 @@ export type GetTransactionsQueryResult = Apollo.QueryResult<
 >;
 export const GetTransactionByIdDocument = gql`
   query GetTransactionById($transactionId: Int!) {
-    transaction(
-      transactionId: $transactionId
-      includeMerchant: true
-      includeReward: true
-    ) {
+    transaction(transactionId: $transactionId, includeReward: true) {
       ... on QueryTransactionSuccess {
         data {
+          dispute {
+            status
+          }
+          creditIndicator
           amountInDollars
           cardLast4Digits
           transactedAt
@@ -2905,11 +3381,6 @@ const result: PossibleTypesResultData = {
       "MutationActivateCardSuccess",
       "ValidationError",
     ],
-    MutationCancelCardResult: [
-      "BaseError",
-      "MutationCancelCardSuccess",
-      "ValidationError",
-    ],
     MutationCompletePhoneNumberUpdateResult: [
       "BaseError",
       "MutationCompletePhoneNumberUpdateSuccess",
@@ -2925,14 +3396,14 @@ const result: PossibleTypesResultData = {
       "MutationCreateDisputeSuccess",
       "ValidationError",
     ],
-    MutationCreateDueDatePaymentScheduleResult: [
+    MutationCreateGiftCardOrderResult: [
       "BaseError",
-      "MutationCreateDueDatePaymentScheduleSuccess",
+      "MutationCreateGiftCardOrderSuccess",
       "ValidationError",
     ],
-    MutationCreateInstantPaymentScheduleResult: [
+    MutationCreateInstantPaymentResult: [
       "BaseError",
-      "MutationCreateInstantPaymentScheduleSuccess",
+      "MutationCreateInstantPaymentSuccess",
       "ValidationError",
     ],
     MutationDeletePaymentMethodResult: [
@@ -2940,34 +3411,34 @@ const result: PossibleTypesResultData = {
       "MutationDeletePaymentMethodSuccess",
       "ValidationError",
     ],
-    MutationDeletePaymentScheduleResult: [
+    MutationHideGiftcardWalletResult: [
       "BaseError",
-      "MutationDeletePaymentScheduleSuccess",
+      "MutationHideGiftcardWalletSuccess",
       "ValidationError",
     ],
-    MutationRedeemPointsResult: [
+    MutationRedeemPointsForCashbackResult: [
       "BaseError",
-      "MutationRedeemPointsSuccess",
+      "MutationRedeemPointsForCashbackSuccess",
+      "ValidationError",
+    ],
+    MutationReferColleaguesResult: [
+      "BaseError",
+      "MutationReferColleaguesSuccess",
+      "ValidationError",
+    ],
+    MutationRegisterOfferAnalyticResult: [
+      "BaseError",
+      "MutationRegisterOfferAnalyticSuccess",
+      "ValidationError",
+    ],
+    MutationRemoveAutoPaymentScheduleResult: [
+      "BaseError",
+      "MutationRemoveAutoPaymentScheduleSuccess",
       "ValidationError",
     ],
     MutationReplaceCardResult: [
       "BaseError",
       "MutationReplaceCardSuccess",
-      "ValidationError",
-    ],
-    MutationReportCardFraudResult: [
-      "BaseError",
-      "MutationReportCardFraudSuccess",
-      "ValidationError",
-    ],
-    MutationReportLostOrStolenCardResult: [
-      "BaseError",
-      "MutationReportLostOrStolenCardSuccess",
-      "ValidationError",
-    ],
-    MutationResolveDisputeResult: [
-      "BaseError",
-      "MutationResolveDisputeSuccess",
       "ValidationError",
     ],
     MutationSendOTPResult: ["BaseError", "MutationSendOTPSuccess", "ValidationError"],
@@ -3041,36 +3512,70 @@ const result: PossibleTypesResultData = {
       "MutationWithdrawDisputeSuccess",
       "ValidationError",
     ],
+    QueryAccountResult: ["BaseError", "QueryAccountSuccess", "ValidationError"],
     QueryActiveAutoPaymentResult: [
       "BaseError",
       "QueryActiveAutoPaymentSuccess",
       "ValidationError",
     ],
-    QueryCardArtResult: ["BaseError", "QueryCardArtSuccess", "ValidationError"],
-    QueryCardResult: ["BaseError", "QueryCardSuccess", "ValidationError"],
-    QueryCardsResult: ["BaseError", "QueryCardsSuccess", "ValidationError"],
-    QueryDetokenizedCardResult: [
+    QueryActivePointsMultiplierResult: [
       "BaseError",
-      "QueryDetokenizedCardSuccess",
+      "QueryActivePointsMultiplierSuccess",
       "ValidationError",
     ],
-    QueryDisputeResult: ["BaseError", "QueryDisputeSuccess", "ValidationError"],
-    QueryExternalMerchantResult: [
+    QueryCardArtResult: ["BaseError", "QueryCardArtSuccess", "ValidationError"],
+    QueryCardholderResult: ["BaseError", "QueryCardholderSuccess", "ValidationError"],
+    QueryFeatureFlagsResult: ["BaseError", "QueryFeatureFlagsSuccess", "ValidationError"],
+    QueryGiftCardCatalogResult: [
       "BaseError",
-      "QueryExternalMerchantSuccess",
+      "QueryGiftCardCatalogSuccess",
+      "ValidationError",
+    ],
+    QueryGiftCardWalletResult: [
+      "BaseError",
+      "QueryGiftCardWalletSuccess",
+      "ValidationError",
+    ],
+    QueryInsurancesResult: ["BaseError", "QueryInsurancesSuccess", "ValidationError"],
+    QueryNetSavingsThisMonthResult: [
+      "BaseError",
+      "QueryNetSavingsThisMonthSuccess",
+      "ValidationError",
+    ],
+    QueryNotificationSettingsResult: [
+      "BaseError",
+      "QueryNotificationSettingsSuccess",
       "ValidationError",
     ],
     QueryOffersResult: ["BaseError", "QueryOffersSuccess", "ValidationError"],
-    QueryPaymentSchedulesResult: [
+    QueryOrganizationResult: ["BaseError", "QueryOrganizationSuccess", "ValidationError"],
+    QueryPaymentMethodsResult: [
       "BaseError",
-      "QueryPaymentSchedulesSuccess",
+      "QueryPaymentMethodsSuccess",
+      "ValidationError",
+    ],
+    QueryPointToDollarConversionResult: [
+      "BaseError",
+      "QueryPointToDollarConversionSuccess",
       "ValidationError",
     ],
     QueryPrimaryCardResult: ["BaseError", "QueryPrimaryCardSuccess", "ValidationError"],
+    QueryRecommendedReferralsResult: [
+      "BaseError",
+      "QueryRecommendedReferralsSuccess",
+      "ValidationError",
+    ],
+    QueryReferralOfferResult: [
+      "BaseError",
+      "QueryReferralOfferSuccess",
+      "ValidationError",
+    ],
     QueryStatementResult: ["BaseError", "QueryStatementSuccess", "ValidationError"],
     QueryStatementsResult: ["BaseError", "QueryStatementsSuccess", "ValidationError"],
+    QueryTotalPointsResult: ["BaseError", "QueryTotalPointsSuccess", "ValidationError"],
     QueryTransactionResult: ["BaseError", "QueryTransactionSuccess", "ValidationError"],
     QueryTransactionsResult: ["BaseError", "QueryTransactionsSuccess", "ValidationError"],
+    TransactionItem: ["PaymentTransaction", "Transaction"],
   },
 };
 export default result;

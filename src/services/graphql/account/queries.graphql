@@ -1,21 +1,37 @@
-query GetAccountOpenDate {
+query GetEmploymentStartDate {
   cardholder @persist {
-    employmentStartDate
+    ... on QueryCardholderSuccess {
+      data {
+        employmentStartDate
+      }
+    }
   }
 }
 
 query GetAccountDetailsForHome {
   account {
-    creditLimit
-    currentBalance
-    dueDateUtc
+    ... on QueryAccountSuccess {
+      data {
+        creditLimit
+        currentBalance
+        dueDateUtc
+      }
+    }
   }
   cardholder {
-    firstName
-    lastName
+    ... on QueryCardholderSuccess {
+      data {
+        firstName
+        lastName
+      }
+    }
   }
-  achPaymentMethods {
-    id
+  paymentMethods {
+    ... on QueryPaymentMethodsSuccess {
+      data {
+        id
+      }
+    }
   }
   cardArt {
     ... on QueryCardArtSuccess {
@@ -27,9 +43,48 @@ query GetAccountDetailsForHome {
   }
 }
 
+query GetPrimaryCardData {
+  primaryCard(detokenized: true) @persist {
+    ... on QueryPrimaryCardSuccess {
+      data {
+        cardNumber
+        cvv
+        expirationDate
+        status
+        id
+        last4Digits
+      }
+    }
+  }
+}
+
+query GetPrimaryCardId {
+  primaryCard(detokenized: false) {
+    ... on QueryPrimaryCardSuccess {
+      data {
+        id
+      }
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on ValidationError {
+      code
+      message
+    }
+  }
+}
+
 query GetAccountBalance {
   account {
-    currentBalance
+    ... on QueryAccountSuccess {
+      data {
+        creditLimit
+        currentBalance
+        dueDateUtc
+      }
+    }
   }
 }
 
@@ -40,7 +95,6 @@ query GetOffersForMembership($category: OfferCategory) {
         title
         details
         longDetails
-        identifier
         hypercardMerchant {
           logoImageUrl
         }
@@ -55,12 +109,93 @@ query GetRestaurants($restaurantCity: RestaurantCity) {
       data {
         title
         details
-        identifier
         restaurantOffer {
           primaryImageUrl
           secondaryImageUrl
           location
+          city
         }
+      }
+    }
+  }
+}
+
+query GetCardholderAddress {
+  cardholder {
+    ... on QueryCardholderSuccess {
+      data {
+        residentialAddress {
+          addressLine1
+          addressLine2
+          city
+          state
+          type
+          zip
+        }
+        shippingAddress {
+          addressLine1
+          addressLine2
+          city
+          state
+          type
+          zip
+        }
+      }
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on ValidationError {
+      code
+      message
+    }
+  }
+}
+
+query GetFeatureFlags {
+  featureFlags {
+    ... on QueryFeatureFlagsSuccess {
+      data {
+        expenseManagementShown
+      }
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on ValidationError {
+      code
+      message
+    }
+  }
+}
+
+query GetNotificationSettings {
+  notificationSettings {
+    ... on QueryNotificationSettingsSuccess {
+      data {
+        promotions
+        rewards
+        transactions
+      }
+    }
+    ... on BaseError {
+      code
+      message
+    }
+    ... on ValidationError {
+      code
+      message
+    }
+  }
+}
+
+query GetUserId {
+  cardholder {
+    ... on QueryCardholderSuccess {
+      data {
+        userId
       }
     }
   }

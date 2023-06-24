@@ -20,6 +20,7 @@ import {
 } from "../hooks";
 import { BottomSheetFlatListProps, BaseBottomSheetRef } from "../types";
 import { INITIAL_SNAP_POINTS } from "../constants";
+import { BackgroundBlurView } from "../BackgroundBlurView";
 import { bottomSheetStyles } from "../styles";
 
 type BottomSheetWithFlatListProps<T> = Omit<
@@ -108,6 +109,7 @@ const BottomSheetWithFlatListWithoutRef = <T,>(
       ref={bottomSheetRef}
       onChange={handleSheetChange}
       style={bottomSheetStyles.baseBottomSheet}
+      backgroundComponent={BackgroundBlurView}
       {...props}
     >
       <YStack onLayout={handleContentLayout}>

@@ -5,6 +5,7 @@ const color = {
   primary15: "rgba(228, 11, 137, 0.15)",
   black: "#000000",
   black0: "rgba(0, 0, 0, 0)",
+  black40: "rgba(0, 0, 0, .40)",
   white: "#FFFFFF",
   white90: "rgba(255, 255, 255, .90)",
   white70: "rgba(255, 255, 255, .70)",
@@ -18,6 +19,8 @@ const color = {
   error: "#AD0000",
   lyftPink: "#FF00FF",
   hyperlink: "#0294FF",
+  green: "#54C186",
+  red: "#BE3E22",
 };
 
 type ColorName = keyof typeof color;

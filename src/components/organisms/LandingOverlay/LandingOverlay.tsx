@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useGetAccountOpenDateQuery } from "services/graphql/generated";
-import { useArtificialLoadingDelay, useHideSplashScreen } from "./hooks";
+import { useGetEmploymentStartDateQuery } from "services/graphql/generated";
+import { useIsEntireAnimationFinished } from "services/zustand";
+import { useHideSplashScreen } from "./hooks";
 import { LoggedInUI } from "./LoggedInUI";
-import { LoggedOutUI } from "./LoggedOutUI";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,36 +14,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const LandingOverlayWithoutSafeArea = () => {
+const safeAreaStyle = [StyleSheet.absoluteFill, styles.landingOverlaySafeArea];
+
+const LandingOverlay = () => {
+  useHideSplashScreen();
+
   const isLoggedIn = true;
-  const { data } = useGetAccountOpenDateQuery({
+
+  const isEntireAnimationFinished = useIsEntireAnimationFinished();
+  const { data } = useGetEmploymentStartDateQuery({
     fetchPolicy: "cache-first",
     skip: !isLoggedIn,
   });
 
-  const [initialEmploymentStartDate] = useState(
-    data?.cardholder?.__typename === "Cardholder"
-      ? data.cardholder.employmentStartDate
-      : undefined,
-  );
+  const employmentStartDate =
+    data?.cardholder?.__typename === "QueryCardholderSuccess"
+      ? data.cardholder.data.employmentStartDate
+      : undefined;
 
-  if (isLoggedIn && initialEmploymentStartDate) {
-    return <LoggedInUI employmentStartDate={initialEmploymentStartDate} />;
+  if (!isEntireAnimationFinished && employmentStartDate) {
+    return (
+      <SafeAreaProvider style={safeAreaStyle}>
+        <LoggedInUI employmentStartDate={employmentStartDate} />
+      </SafeAreaProvider>
+    );
   }
 
-  return <LoggedOutUI />;
-};
-
-const LandingOverlay = () => {
-  const isArtificiallyLoading = useArtificialLoadingDelay();
-
-  useHideSplashScreen();
-
-  return !isArtificiallyLoading ? null : (
-    <SafeAreaProvider style={[StyleSheet.absoluteFill, styles.landingOverlaySafeArea]}>
-      <LandingOverlayWithoutSafeArea />
-    </SafeAreaProvider>
-  );
+  return null;
 };
 
 export { LandingOverlay };

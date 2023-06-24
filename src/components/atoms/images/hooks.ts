@@ -1,12 +1,11 @@
 import { useMemo } from "react";
 import { useImageDimensions } from "@react-native-community/hooks";
-import { ImageName } from "assets/images";
 import { SpaceTokens } from "tamagui";
 import { getPrefixedSpaceValue } from "theme/utils";
 import { getImageSource } from "./utils";
+import { BaseImageProps } from "./BaseImage";
 
-type UseLocalImageDimensionsParams = {
-  imageName: ImageName;
+type UseLocalImageDimensionsParams = Omit<BaseImageProps, "height" | "width"> & {
   height?: SpaceTokens;
   width?: SpaceTokens;
 };
