@@ -7,7 +7,7 @@ import { ColorName } from "theme/tokens/color";
 import { useImageDimensions } from "@react-native-community/hooks";
 import { useLayoutAnimationOnChange } from "utils";
 
-type IconProps = Omit<ImageProps, "src" | "style" | "width" | "height"> & {
+type IconProps = Omit<ImageProps, "source" | "style" | "width" | "height"> & {
   iconName: IconName;
   tintColor?: ColorName;
 } & ({ height: number; width?: undefined } | { height?: undefined; width: number });
@@ -44,7 +44,7 @@ const Icon = ({ iconName, tintColor, ...props }: IconProps) => {
       {...props}
       width={props.width ?? iconWidthOrHeight}
       height={props.height ?? iconWidthOrHeight}
-      src={src}
+      source={src}
       style={style}
     />
   );

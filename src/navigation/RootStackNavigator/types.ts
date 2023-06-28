@@ -5,6 +5,7 @@ type RootStackNavigatorParamList = {
   EnterFeedbackScreen: undefined;
   BottomTabNavigator: undefined;
   Storybook: undefined;
+  AddNewVirtualCard: undefined;
 };
 
 type RootStackNavigatorRouteName = keyof RootStackNavigatorParamList;

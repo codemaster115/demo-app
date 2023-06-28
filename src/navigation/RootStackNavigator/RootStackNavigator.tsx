@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { getColorValue } from "theme/utils";
 import { useNavigationExperience } from "navigation/hooks";
 import { BottomTabNavigator } from "navigation/BottomTabNavigator";
-import { Header3 } from "components/atoms";
+import { Caption, Header3 } from "components/atoms";
+import { AddNewVirtualCard } from "screens/AddNewVirtualCard";
 import { Storybook } from "../../../.storybook/Storybook";
 import { RootStackNavigatorParamList } from "./types";
 
@@ -34,11 +35,25 @@ const RootStackNavigator = () => {
                 ""
               ),
             headerStyle: { backgroundColor: getColorValue("black") },
-            headerBackTitleVisible: true,
+            headerBackTitleVisible: false,
             headerLeft: () => null,
           })}
         >
-          <Stack.Screen name={"BottomTabNavigator"} component={BottomTabNavigator} />
+          <Stack.Screen
+            name={"BottomTabNavigator"}
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name={"AddNewVirtualCard"}
+            component={AddNewVirtualCard}
+            options={{
+              headerTitle: () => <Caption color={"$white"}>{"NEW VIRTUAL CARD"}</Caption>,
+              headerBackTitleVisible: true,
+              headerBackTitle: "bbs",
+              headerBackTitleStyle: { fontSize: 40 },
+            }}
+          />
         </Stack.Group>
       );
     }

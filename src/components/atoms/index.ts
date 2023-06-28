@@ -11,3 +11,4 @@ export * from "./texts";
 export * from "./BaseToggle";
 export * from "./Touchable";
 export * from "./Wordmark";
+export * from "./carousels";

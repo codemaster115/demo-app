@@ -1,40 +1,29 @@
 import {
-  AspectImage,
+  BlurCarouselItem,
   Body1,
   Caption,
   Header1,
-  RemoteImage,
+  ParallaxCarousel,
   ScreenContainer,
   ScreenSubContainer,
-  Touchable,
 } from "components/atoms";
-import { Spacer, Stack } from "tamagui";
-import { HomeTabStackReactNavigationProps } from "navigation/HomeTabStackNavigator/types";
 import { ErrorUI } from "components/molecules";
+import { NewCard } from "components/molecules/NewCard";
+import { HomeTabStackReactNavigationProps } from "navigation/HomeTabStackNavigator/types";
 import { useTransactionsBottomSheetStore } from "services/zustand";
+import { Spacer, Stack } from "tamagui";
 import { useLayoutAnimationOnChange } from "utils";
-import { FlipCard, FlipSide } from "components/molecules/FlipCard";
-import { LoadingPlaceholder } from "./LoadingPlaceholder";
-import { TransactionsBottomSheet } from "./TransactionsBottomSheet";
-import { MakePaymentButton } from "./MakePaymentButton";
-import { useAccountDetailsForHome, useCardVisibility } from "./hooks";
-import {
-  CardNumbers,
-  LoadingPlaceholder as CardNumbersLoadingPlaceholder,
-} from "./CardNumbers";
-import { CARD_IMAGE_ASPECT_RATIO, CARD_IMAGE_WIDTH, styles } from "./styles";
+import { CarouselCard } from "./CarouselCard";
 import { GlassVideo } from "./GlassVideo";
+import { useAccountDetailsForHome } from "./hooks";
+import { LoadingPlaceholder } from "./LoadingPlaceholder";
+import { MakePaymentButton } from "./MakePaymentButton";
+import { TransactionsBottomSheet } from "./TransactionsBottomSheet";
 
 type HomeScreenProps = HomeTabStackReactNavigationProps<"HomeScreen">;
+const colors = ["#26292E", "#899F9C", "#B3C680", "#5C6265", "#F5D399", "#F1F1F1"];
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
-  const {
-    isFrontOfCardVisible,
-    handleFlipCard,
-    maybePrimaryCardData,
-    loading: isPrimaryCardDataLoading,
-  } = useCardVisibility(navigation);
-
   const {
     loading,
     error,
@@ -74,51 +63,26 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
                 {currentBalance}
               </Header1>
               <Spacer size={"$5"} />
-              <Body1
-                color={"$white70"}
-                fontWeight={"300"}
-              >{`Credit limit: ${creditLimit}`}</Body1>
+              <Body1 color={"$white70"} fontWeight={"300"}>
+                {`Credit limit: ${creditLimit}`}
+              </Body1>
               <Spacer size={"$6"} />
-              <Touchable onPress={handleFlipCard} pressStyle={undefined}>
-                {cardArt ? (
-                  <FlipCard
-                    style={styles.flipCard}
-                    side={isFrontOfCardVisible ? FlipSide.FRONT : FlipSide.BACK}
-                    front={
-                      <RemoteImage
-                        width={CARD_IMAGE_WIDTH}
-                        aspectRatio={CARD_IMAGE_ASPECT_RATIO}
-                        uri={cardArt.frontImageUrl}
-                      />
-                    }
-                    back={
-                      <Stack>
-                        <RemoteImage
-                          width={CARD_IMAGE_WIDTH}
-                          aspectRatio={CARD_IMAGE_ASPECT_RATIO}
-                          uri={cardArt.backImageUrl}
-                        />
-                        {isPrimaryCardDataLoading ? (
-                          <CardNumbersLoadingPlaceholder />
-                        ) : (
-                          <CardNumbers
-                            formattedCardNumber={
-                              maybePrimaryCardData?.formattedCardNumber
-                            }
-                            formattedExpirationDate={
-                              maybePrimaryCardData?.formattedExpirationDate
-                            }
-                            cvv={maybePrimaryCardData?.cvv}
-                          />
-                        )}
-                      </Stack>
-                    }
-                  />
-                ) : (
-                  <AspectImage imageName={"default-hypercard"} width={CARD_IMAGE_WIDTH} />
-                )}
-              </Touchable>
-
+              <Stack paddingHorizontal={-20}>
+                <ParallaxCarousel
+                  vertical={false}
+                  //TODO need to pass real data of card list
+                  data={colors}
+                  renderItem={({ index, animationValue }) => (
+                    <BlurCarouselItem animationValue={animationValue}>
+                      {index === colors.length - 1 ? (
+                        <NewCard />
+                      ) : (
+                        <CarouselCard cardArt={cardArt} />
+                      )}
+                    </BlurCarouselItem>
+                  )}
+                />
+              </Stack>
               <Spacer size={"$6"} />
               <MakePaymentButton hasExistingPaymentMethods={hasExistingPaymentMethods} />
               <Spacer size={"$6"} />

@@ -1,3 +1,4 @@
+// Don't forget to specify your TAMAGUI_TARGET here or ideally in the command to run / .env files
 process.env.TAMAGUI_TARGET = "native";
 
 module.exports = function (api) {
@@ -15,6 +16,13 @@ module.exports = function (api) {
   ];
 
   let plugins = [
+    // NOTE: this is required to pass the right environment
+    [
+      "transform-inline-environment-variables",
+      {
+        include: "TAMAGUI_TARGET",
+      },
+    ],
     [
       "@tamagui/babel-plugin",
       {
@@ -43,7 +51,7 @@ module.exports = function (api) {
           ".js",
           ".json",
           ".png",
-          ".svg",
+          // ".svg",
         ],
       },
     ],

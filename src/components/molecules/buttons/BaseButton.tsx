@@ -6,6 +6,11 @@ const BaseButton = styled(Button, {
   color: "$black",
   fontWeight: "500",
   fontSize: "$3",
+  alignItems: "center",
+  justifyContent: "center",
+  textProps: {
+    textAlign: "center",
+  },
   variants: {
     disabled: {
       true: {

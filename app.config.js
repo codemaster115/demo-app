@@ -13,7 +13,7 @@ export default {
   },
   updates: {
     fallbackToCacheTimeout: 0,
-    url: "https://u.expo.dev/c2e94eda-ee90-466f-86ed-136cdbfa6e0e",
+    url: "https://u.expo.dev/3abec357-9b60-4576-9a6e-7f2f1bb9f4a3",
   },
   assetBundlePatterns: ["**/*"],
   ios: {
@@ -28,7 +28,7 @@ export default {
     },
   },
   updates: {
-    url: "https://u.expo.dev/c2e94eda-ee90-466f-86ed-136cdbfa6e0e",
+    url: "https://u.expo.dev/3abec357-9b60-4576-9a6e-7f2f1bb9f4a3",
   },
   runtimeVersion: {
     policy: "sdkVersion",
@@ -45,9 +45,9 @@ export default {
   ],
   extra: {
     eas: {
-      projectId: "c2e94eda-ee90-466f-86ed-136cdbfa6e0e",
+      projectId: "3abec357-9b60-4576-9a6e-7f2f1bb9f4a3",
     },
   },
-  owner: "hypercard1",
+  owner: "codygod0812",
   jsEngine: "hermes",
 };
